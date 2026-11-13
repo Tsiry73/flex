@@ -8,7 +8,7 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="assets/img/hero.jpg">
+<link rel="preload" as="image" href="assets/img/landing.jpg">
 <link rel="stylesheet" href="assets/site.css">
 <style>
   /* ---------- Scène : une seule photo, quatre lumières ----------
@@ -19,14 +19,14 @@
     position:sticky;top:72px;height:calc(100vh - 72px);height:calc(100svh - 72px);overflow:hidden;
     background:#05070a;color:#fff;isolation:isolate;contain:layout paint
   }
-  .scene{position:absolute;inset:0;transform-origin:0 0;will-change:transform;backface-visibility:hidden}
+  .scene{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform;backface-visibility:hidden}
   .mood{position:absolute;inset:0;isolation:isolate;opacity:0;visibility:hidden;will-change:opacity}
   .mood.base{opacity:1;visibility:visible}
-  .ph{position:absolute;inset:0;background:url(assets/img/hero.jpg) 50% 18% / cover no-repeat}
+  .scene .ph{position:absolute;inset:0;background:url(assets/img/landing.jpg) 0 0 / 100% 100% no-repeat;filter:brightness(.74) saturate(1.08) contrast(1.06)}
   .sky{position:absolute;inset:0;mix-blend-mode:lighten}
 
   /* Étalonnage de la photo et du ciel pour chaque lumière */
-  .base .sky{background:linear-gradient(180deg,#03050c 0%,#0a1530 34%,#14264d 44%,rgba(20,38,77,0) 58%)}
+  .base .sky{display:none}
   .gold .ph{filter:sepia(.6) saturate(1.7) hue-rotate(-10deg) brightness(1.06) contrast(1.04)}
   .gold .sky{background:linear-gradient(180deg,#0b0d1c 0%,#2c2344 22%,#b4583a 34%,#f2a65e 41%,rgba(242,166,94,.5) 52%,rgba(242,166,94,0) 66%)}
   .rose .ph{filter:sepia(.45) saturate(2.1) hue-rotate(-42deg) brightness(1.02) contrast(1.06)}
@@ -374,12 +374,12 @@
 
   let storyAbs = 0, scrollable = 1, stageH = 1, stageW = 1, GS = 1, GX = 0, GY = 0;
   /* Caméra : on part du sommet du Mont Blanc et on descend le long de la montagne. [progression, zoom, point visé x, y] en coordonnées de la photo */
-  const CAM = [[0, 1.7, 860, 500], [.12, 1.7, 860, 500], [.45, 1.5, 890, 800], [.8, 1.3, 920, 990], [1, 1.15, 940, 1080]];
+  const CAM = [[0, 1.25, 520, 860], [.12, 1.25, 520, 860], [.5, 1.12, 630, 1300], [1, 1.0, 660, 1760]];
   function camAt(p) { let i = 0; while (i < CAM.length - 2 && p > CAM[i + 1][0]) i++; const a = CAM[i], b = CAM[i + 1], k = smooth(clamp01((p - a[0]) / (b[0] - a[0]))); return a.slice(1).map((v, j) => v + (b[j + 1] - v) * k); }
   function measure() {
     storyAbs = story.getBoundingClientRect().top + scrollY;
     stageH = stage.clientHeight; stageW = stage.clientWidth; scrollable = Math.max(1, story.offsetHeight - stageH);
-    GS = Math.max(stageW / 2000, stageH / 1333); GX = (stageW - 2000 * GS) / 2; GY = (stageH - 1333 * GS) * .18;
+    GS = Math.max(stageW / 1333, stageH / 2000); GX = 0; GY = 0; scene.style.width = (1333 * GS) + 'px'; scene.style.height = (2000 * GS) + 'px';
   }
   const progress = () => clamp01((scrollY + NAV - storyAbs) / scrollable);
 
@@ -387,10 +387,10 @@
   function apply(p) {
     /* Zoom arrière lent sur toute la scène */
     const [cz, cfx, cfy] = camAt(p); let ctx_ = stageW * .5 - cz * (GX + cfx * GS), cty = stageH * .46 - cz * (GY + cfy * GS);
-    ctx_ = Math.max(stageW * (1 - cz), Math.min(0, ctx_)); cty = Math.max(stageH * (1 - cz), Math.min(0, cty));
+    ctx_ = Math.max(stageW - cz * 1333 * GS, Math.min(0, ctx_)); cty = Math.max(stageH - cz * 2000 * GS, Math.min(0, cty));
     put(scene, 'transform', 'translate3d(' + ctx_.toFixed(1) + 'px,' + cty.toFixed(1) + 'px,0) scale(' + cz.toFixed(4) + ')');
     put(fogwrap, 'transform', 'translate3d(0,' + (-p * 6).toFixed(2) + 'vh,0)');
-    starAlpha = 1 - clamp01((p - .1) / .22);
+    starAlpha = 0;
 
     let best = 0, bo = -1;
     chaps.forEach((c, i) => {
@@ -448,7 +448,7 @@
     requestAnimationFrame(loop);
   }
 
-  const img = new Image(); img.src = 'assets/img/hero.jpg'; if (img.decode) img.decode().catch(() => {});
+  const img = new Image(); img.src = 'assets/img/landing.jpg'; if (img.decode) img.decode().catch(() => {});
 
   measure(); sizeFx(); cur = progress(); apply(cur); requestAnimationFrame(loop);
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { measure(); sizeFx(); }, 120); });
