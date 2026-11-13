@@ -161,12 +161,7 @@
     <div class="stage" id="stage">
       <div class="scene" id="scene" aria-hidden="true">
         <div class="mood base"><div class="ph"></div><div class="sky"></div></div>
-        <div class="mood gold"><div class="ph"></div><div class="sky"></div></div>
-        <div class="mood rose"><div class="ph"></div><div class="sky"></div></div>
-        <div class="mood ice"><div class="ph"></div><div class="sky"></div></div>
       </div>
-      <div class="sun" id="sun" aria-hidden="true"></div>
-      <div class="flare" id="flare" aria-hidden="true"></div>
       <div class="fogwrap" id="fogwrap" aria-hidden="true"><div class="fog"></div><div class="fog"></div><div class="fog"></div></div>
       <canvas id="fx" aria-hidden="true"></canvas>
       <div class="shade" aria-hidden="true"></div>
@@ -363,8 +358,7 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const story = document.getElementById('story'), stage = document.getElementById('stage');
   const scene = document.getElementById('scene');
-  const moods = [...document.querySelectorAll('.mood:not(.base)')];
-  const sun = document.getElementById('sun'), flare = document.getElementById('flare'), fogwrap = document.getElementById('fogwrap');
+  const fogwrap = document.getElementById('fogwrap');
   const chaps = [...document.querySelectorAll('.chap')], rail = [...document.querySelectorAll('#rail li')];
   const cue = document.getElementById('cue'), fadeout = document.getElementById('fadeout');
   const NAV = 72;
@@ -378,17 +372,6 @@
   const RANGES = [[-1, .14, .1], [.26, .44, .06], [.52, .70, .06], [.77, 1.1, .05]];
   const vis = (p, a, b, f) => clamp01(Math.min((p - a) / f, (b - p) / f, 1));
 
-  /* Les lumières s'empilent : chacune apparaît en fondu et reste (or, rose, glace). */
-  const MOOD_AT = [.18, .46, .72], MOOD_LEN = .12;
-
-  /* Trajet du soleil : [progression, x, y, taille, opacité] (x et y en part de l'écran) */
-  const SUN = [[0, .78, .20, .8, 0], [.2, .78, .20, .8, 0], [.32, .70, .24, 1, .9], [.46, .60, .28, 1.1, 1], [.62, .30, .43, 1.25, 1], [.70, .24, .47, 1.2, .0], [.76, .60, .12, .9, 0], [.84, .60, .11, 1, 1], [1, .64, .09, 1.1, 1]];
-  function sunAt(p) {
-    let i = 0; while (i < SUN.length - 2 && p > SUN[i + 1][0]) i++;
-    const a = SUN[i], b = SUN[i + 1], t = smooth(clamp01((p - a[0]) / (b[0] - a[0])));
-    return a.slice(1).map((v, k) => v + (b[k + 1] - v) * t);
-  }
-
   let storyAbs = 0, scrollable = 1, stageH = 1, stageW = 1;
   function measure() {
     storyAbs = story.getBoundingClientRect().top + scrollY;
@@ -400,19 +383,8 @@
   function apply(p) {
     /* Zoom arrière lent sur toute la scène */
     put(scene, 'transform', 'translate3d(0,' + (smooth(clamp01(p / .5)) * 3).toFixed(2) + 'vh,0) scale(' + (1.1 - p * .08).toFixed(4) + ')');
-    moods.forEach((m, i) => {
-      const o = clamp01((p - MOOD_AT[i]) / MOOD_LEN);
-      put(m, 'visibility', o > .003 ? 'visible' : 'hidden');
-      if (o > .003) put(m, 'opacity', o.toFixed(3));
-    });
-    const [sx, sy, ss, so] = sunAt(p);
-    put(sun, 'opacity', so.toFixed(3));
-    if (so > .003) put(sun, 'transform', 'translate3d(' + (sx * stageW).toFixed(1) + 'px,' + (sy * stageH).toFixed(1) + 'px,0) scale(' + ss.toFixed(3) + ')');
-    const fo = clamp01((p - .74) / .12) * so;
-    put(flare, 'opacity', fo.toFixed(3));
-    if (fo > .003) put(flare, 'transform', 'translate3d(' + (sx * stageW).toFixed(1) + 'px,' + (sy * stageH).toFixed(1) + 'px,0)');
     put(fogwrap, 'transform', 'translate3d(0,' + (-p * 6).toFixed(2) + 'vh,0)');
-    starAlpha = 1 - clamp01((p - .12) / .14);
+    starAlpha = 1;
 
     let best = 0, bo = -1;
     chaps.forEach((c, i) => {
