@@ -19,7 +19,7 @@
     position:sticky;top:72px;height:calc(100vh - 72px);height:calc(100svh - 72px);overflow:hidden;
     background:#05070a;color:#fff;isolation:isolate;contain:layout paint
   }
-  .scene{position:absolute;inset:0;will-change:transform;backface-visibility:hidden}
+  .scene{position:absolute;inset:0;transform-origin:0 0;will-change:transform;backface-visibility:hidden}
   .mood{position:absolute;inset:0;isolation:isolate;opacity:0;visibility:hidden;will-change:opacity}
   .mood.base{opacity:1;visibility:visible}
   .ph{position:absolute;inset:0;background:url(assets/img/hero.jpg) 50% 18% / cover no-repeat}
@@ -372,19 +372,25 @@
   const RANGES = [[-1, .14, .1], [.26, .44, .06], [.52, .70, .06], [.77, 1.1, .05]];
   const vis = (p, a, b, f) => clamp01(Math.min((p - a) / f, (b - p) / f, 1));
 
-  let storyAbs = 0, scrollable = 1, stageH = 1, stageW = 1;
+  let storyAbs = 0, scrollable = 1, stageH = 1, stageW = 1, GS = 1, GX = 0, GY = 0;
+  /* Caméra : on part du sommet du Mont Blanc et on descend le long de la montagne. [progression, zoom, point visé x, y] en coordonnées de la photo */
+  const CAM = [[0, 1.7, 860, 500], [.12, 1.7, 860, 500], [.45, 1.5, 890, 800], [.8, 1.3, 920, 990], [1, 1.15, 940, 1080]];
+  function camAt(p) { let i = 0; while (i < CAM.length - 2 && p > CAM[i + 1][0]) i++; const a = CAM[i], b = CAM[i + 1], k = smooth(clamp01((p - a[0]) / (b[0] - a[0]))); return a.slice(1).map((v, j) => v + (b[j + 1] - v) * k); }
   function measure() {
     storyAbs = story.getBoundingClientRect().top + scrollY;
     stageH = stage.clientHeight; stageW = stage.clientWidth; scrollable = Math.max(1, story.offsetHeight - stageH);
+    GS = Math.max(stageW / 2000, stageH / 1333); GX = (stageW - 2000 * GS) / 2; GY = (stageH - 1333 * GS) * .18;
   }
   const progress = () => clamp01((scrollY + NAV - storyAbs) / scrollable);
 
   let starAlpha = 1;
   function apply(p) {
     /* Zoom arrière lent sur toute la scène */
-    put(scene, 'transform', 'translate3d(0,' + (smooth(clamp01(p / .5)) * 3).toFixed(2) + 'vh,0) scale(' + (1.1 - p * .08).toFixed(4) + ')');
+    const [cz, cfx, cfy] = camAt(p); let ctx_ = stageW * .5 - cz * (GX + cfx * GS), cty = stageH * .46 - cz * (GY + cfy * GS);
+    ctx_ = Math.max(stageW * (1 - cz), Math.min(0, ctx_)); cty = Math.max(stageH * (1 - cz), Math.min(0, cty));
+    put(scene, 'transform', 'translate3d(' + ctx_.toFixed(1) + 'px,' + cty.toFixed(1) + 'px,0) scale(' + cz.toFixed(4) + ')');
     put(fogwrap, 'transform', 'translate3d(0,' + (-p * 6).toFixed(2) + 'vh,0)');
-    starAlpha = 1;
+    starAlpha = 1 - clamp01((p - .1) / .22);
 
     let best = 0, bo = -1;
     chaps.forEach((c, i) => {
