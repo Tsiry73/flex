@@ -1,6 +1,6 @@
 /* Flex by Tsiry — éléments communs (bandeau, navigation, pied de page, visuels) */
 (function () {
-  const LOGO = '<svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="#A6875A" stroke-width="1"/><path d="M7 28 L16 15 L21 21 L25 16 L33 28 Z" fill="#191815"/><path d="M16 15 L18.4 18.4 L16.8 18 L15 19.6 L13.9 18.1 Z M25 16 L26.8 18.6 L25.4 18.3 L24 19.3 Z" fill="#F5F1E8"/></svg>';
+  const LOGO = '<svg viewBox="5 12 30 18" aria-hidden="true"><path d="M7 28 L16 15 L21 21 L25 16 L33 28 Z" fill="#191815"/><path d="M16 15 L18.4 18.4 L16.8 18 L15 19.6 L13.9 18.1 Z M25 16 L26.8 18.6 L25.4 18.3 L24 19.3 Z" fill="#F5F1E8"/></svg>';
   window.FLEX_LOGO = LOGO;
 
   const page = document.body.dataset.page || '';

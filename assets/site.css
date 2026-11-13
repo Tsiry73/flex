@@ -44,7 +44,7 @@ p{margin:0 0 1em}
 .nav{position:sticky;top:0;z-index:50;background:rgba(251,249,244,.97);border-bottom:1px solid var(--line)}
 .nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px;gap:28px}
 .brand{display:flex;align-items:center;justify-content:center;gap:14px;text-decoration:none;text-align:center}
-.brand svg{width:30px;height:30px;flex:none}
+.brand svg{width:50px;height:30px;flex:none}
 .brand > span{display:block;text-align:center}
 .brand-name{display:block;font-family:var(--brand);font-size:1.5rem;letter-spacing:.42em;margin-right:-.42em;font-weight:300;line-height:1}
 .brand-by{display:block;font-family:var(--brand);font-weight:300;font-size:.5rem;letter-spacing:.55em;margin-right:-.55em;text-transform:uppercase;color:var(--muted);margin-top:7px}

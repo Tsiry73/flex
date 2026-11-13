@@ -36,16 +36,16 @@
   }
   function line1(c, str, x, y, o) { font(c, o); c.fillStyle = o.color || '#fff'; c.textAlign = o.align || 'left'; c.textBaseline = 'alphabetic'; c.fillText(str, x, y); }
   function label(c, str, x, y, size, col, align, tr) { font(c, { size, weight: 500 }); c.fillStyle = col; c.textBaseline = 'alphabetic'; return tracked(c, str.toUpperCase(), x, y, tr ?? size * .3, align || 'left'); }
-  function mark(c, x, y, r, col, ring) {
-    c.save(); c.translate(x - r, y - r); const k = r * 2 / 40; c.scale(k, k);
-    c.strokeStyle = ring || GOLD; c.lineWidth = 1.3; c.beginPath(); c.arc(20, 20, 19, 0, 6.283); c.stroke();
-    c.fillStyle = col; c.beginPath(); c.moveTo(7, 28); c.lineTo(16, 15); c.lineTo(21, 21); c.lineTo(25, 16); c.lineTo(33, 28); c.closePath(); c.fill(); c.restore();
+  function mark(c, x, y, r, col) {
+    const k = r * 3 / 26; c.save(); c.translate(x - 20 * k, y - 21.5 * k); c.scale(k, k);
+    c.fillStyle = col; c.beginPath(); c.moveTo(7, 28); c.lineTo(16, 15); c.lineTo(21, 21); c.lineTo(25, 16); c.lineTo(33, 28); c.closePath(); c.fill();
+    c.fillStyle = '#F5F1E8'; c.beginPath(); c.moveTo(16, 15); c.lineTo(18.4, 18.4); c.lineTo(16.8, 18); c.lineTo(15, 19.6); c.lineTo(13.9, 18.1); c.closePath(); c.moveTo(25, 16); c.lineTo(26.8, 18.6); c.lineTo(25.4, 18.3); c.lineTo(24, 19.3); c.closePath(); c.fill(); c.restore();
   }
   function brand(c, cx, y, s, col, sub) {
     mark(c, cx, y, s * .62, col); font(c, { size: s, weight: 300 }); c.fillStyle = col; tracked(c, 'FLEX', cx, y + s * 1.9, s * .42, 'center');
     font(c, { size: s * .3, weight: 400 }); c.fillStyle = sub || col; tracked(c, 'BY TSIRY', cx, y + s * 2.5, s * .2, 'center');
   }
-  function brandRow(c, x, y, s, col) { mark(c, x + s, y, s, col); font(c, { size: s * .62, weight: 400 }); c.fillStyle = col; c.textBaseline = 'middle'; tracked(c, 'FLEX BY TSIRY', x + s * 2.7, y, s * .16, 'left'); c.textBaseline = 'alphabetic'; }
+  function brandRow(c, x, y, s, col) { mark(c, x + s * 1.5, y, s, col); font(c, { size: s * .62, weight: 400 }); c.fillStyle = col; c.textBaseline = 'middle'; tracked(c, 'FLEX BY TSIRY', x + s * 3.5, y, s * .16, 'left'); c.textBaseline = 'alphabetic'; }
   function pill(c, x, y, str, o) {
     font(c, { size: o.size, weight: 500 }); const tr = o.size * .22, w = [...str].reduce((a, ch) => a + c.measureText(ch).width + tr, -tr) + o.pad * 2, h = o.size * 2.3;
     const px = o.align === 'center' ? x - w / 2 : x; c.fillStyle = o.bg; c.beginPath(); c.roundRect ? c.roundRect(px, y - h / 2, w, h, h / 2) : c.rect(px, y - h / 2, w, h); c.fill();
@@ -207,7 +207,7 @@
     const c = canvas.getContext('2d'); c.setTransform(scale, 0, 0, scale, 0, 0); c.clearRect(0, 0, W, H); c.textBaseline = 'alphabetic'; c.lineCap = 'butt'; fn(c, W, H);
   }
   const esc = s => s.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m]));
-  const AV = '<svg viewBox="0 0 40 40"><path d="M7 28 L16 15 L21 21 L25 16 L33 28 Z" fill="#F5F1E8"/></svg>';
+  const AV = '<svg viewBox="5 12 30 18"><path d="M7 28 L16 15 L21 21 L25 16 L33 28 Z" fill="#F5F1E8"/></svg>';
   const IC = { heart: '<svg viewBox="0 0 24 24"><path d="M12 21C7 17 3 13.5 3 9.5A4.5 4.5 0 0 1 12 7.5 4.5 4.5 0 0 1 21 9.5C21 13.5 17 17 12 21z"/></svg>', comment: '<svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>', send: '<svg viewBox="0 0 24 24"><path d="M21 3L3 11l7 3 3 7z M10 14l11-11"/></svg>', save: '<svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg>' };
 
   function card(p, i) {
