@@ -1,7 +1,7 @@
 /* Flex by Tsiry — charte graphique */
-@import url("https://fonts.googleapis.com/css2?family=Italiana&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap");
 :root{
-  --brand:"Italiana", "Cormorant Garamond", serif;
+  --brand:"Montserrat", "Helvetica Neue", Arial, sans-serif;
   --ivory:#F5F1E8;
   --paper:#FBF9F4;
   --ink:#191815;
@@ -41,17 +41,17 @@ p{margin:0 0 1em}
 .demo-banner{background:var(--ink);color:var(--gold-2);text-align:center;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;padding:8px 16px;position:relative;z-index:60}
 
 /* Navigation */
-.nav{position:sticky;top:0;z-index:50;background:rgba(251,249,244,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(251,249,244,.97);border-bottom:1px solid var(--line)}
 .nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:72px;gap:28px}
 .brand{display:flex;align-items:center;justify-content:center;gap:14px;text-decoration:none;text-align:center}
 .brand svg{width:30px;height:30px;flex:none}
 .brand > span{display:block;text-align:center}
-.brand-name{display:block;font-family:var(--brand);font-size:1.85rem;letter-spacing:.34em;margin-right:-.34em;font-weight:400;line-height:1}
-.brand-by{display:block;font-family:var(--sans);font-weight:300;font-size:.56rem;letter-spacing:.46em;margin-right:-.46em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.brand-name{display:block;font-family:var(--brand);font-size:1.5rem;letter-spacing:.42em;margin-right:-.42em;font-weight:300;line-height:1}
+.brand-by{display:block;font-family:var(--brand);font-weight:300;font-size:.5rem;letter-spacing:.55em;margin-right:-.55em;text-transform:uppercase;color:var(--muted);margin-top:7px}
 .nav-side{display:flex;gap:4px;align-items:center;list-style:none;margin:0;padding:0}
 .nav-left{justify-content:flex-start}
 .nav-right{justify-content:flex-end}
-.nav-side a,.nav-mobile a{text-decoration:none;font-weight:400;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;padding:10px 12px;color:var(--ink-2);position:relative;transition:color .3s}
+.nav-side a,.nav-mobile a{text-decoration:none;font-family:var(--brand);font-weight:400;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 12px;color:var(--ink-2);position:relative;transition:color .3s}
 .nav-side a:not(.nav-cta)::after{content:"";position:absolute;left:12px;right:12px;bottom:5px;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
 .nav-side a:hover::after,.nav-side a.active::after{transform:scaleX(1)}
 .nav-side a:hover,.nav-side a.active{color:var(--ink)}
@@ -66,7 +66,7 @@ p{margin:0 0 1em}
   .nav-side{display:none}
   .burger{display:block;grid-column:3}
   .brand{grid-column:2}
-  .brand-name{font-size:1.6rem}
+  .brand-name{font-size:1.25rem}
   .nav-mobile{display:flex;list-style:none;margin:0;position:absolute;top:100%;left:0;right:0;background:var(--paper);flex-direction:column;align-items:stretch;padding:12px 24px 24px;border-bottom:1px solid var(--line);gap:0;transform:translateY(-8px);opacity:0;pointer-events:none;transition:.3s}
   .nav-mobile.open{opacity:1;transform:none;pointer-events:auto}
   .nav-mobile a{display:block;padding:15px 0;border-bottom:1px solid var(--line)}
