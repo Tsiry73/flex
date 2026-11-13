@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flex by Tsiry · Leçons de ski privées</title>
+<meta name="description" content="Leçons de ski privées sur mesure à Courchevel, Megève et Val d'Isère. Projet étudiant INSEEC, démo sans vente réelle.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  /* ---------- Scène animée ---------- */
+  .story{position:relative;height:560vh;background:#14181A}
+  .stage{
+    position:sticky;top:72px;height:calc(100vh - 72px);height:calc(100svh - 72px);overflow:hidden;
+    --sky0:#0b0f16;--sky1:#1d2940;--sky2:#8f6f60;--sun:#f3cfa0;
+    --m1:#4b5770;--m2:#38435a;--m3:#262e41;--m4:#12171f;--snow:#c9d3e4;
+    background:linear-gradient(180deg,var(--sky0) 0%,var(--sky1) 55%,var(--sky2) 100%);
+    color:#fff;isolation:isolate
+  }
+  .sun{position:absolute;width:15vmin;height:15vmin;border-radius:50%;background:var(--sun);
+    box-shadow:0 0 0 4vmin color-mix(in srgb,var(--sun) 18%,transparent),0 0 12vmin 6vmin color-mix(in srgb,var(--sun) 40%,transparent);
+    will-change:transform,left,top;z-index:0}
+  .layer{position:absolute;left:-10%;width:120%;bottom:0;height:100%;will-change:transform;z-index:1}
+  .layer svg{display:block;width:100%;height:100%}
+  .mist{position:absolute;left:0;right:0;bottom:0;height:55%;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg,transparent,color-mix(in srgb,var(--sky2) 22%,transparent) 60%,transparent)}
+  #snow{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+  .shade{position:absolute;inset:0;z-index:4;pointer-events:none;
+    background:linear-gradient(180deg,rgba(8,10,12,.35) 0%,rgba(8,10,12,0) 28%,rgba(8,10,12,0) 45%,rgba(8,10,12,.72) 100%)}
+  .fadeout{position:absolute;inset:0;z-index:9;background:#14181A;opacity:0;pointer-events:none}
+
+  .chap{position:absolute;left:0;right:0;bottom:9vh;z-index:6;opacity:0;pointer-events:none;will-change:opacity,transform}
+  .chap .in{max-width:var(--max);margin:0 auto;padding:0 24px}
+  .chap .eyebrow{color:var(--gold-2)}
+  .chap h1,.chap h2{font-weight:400;margin:0 0 .25em;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+  .chap h1{font-size:clamp(2.6rem,6.4vw,5.6rem);max-width:920px}
+  .chap h1 em{font-style:italic;color:var(--gold-2)}
+  .chap h2{font-size:clamp(3.4rem,11vw,9.5rem);line-height:.95;letter-spacing:-.01em}
+  .chap .count{text-shadow:0 1px 14px rgba(0,0,0,.6);display:block;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:14px}
+  .chap .when{font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.9rem);font-style:italic;color:#F0E8D8;margin:0 0 6px}
+  .chap p.sub{max-width:520px;color:#E4DED2;margin:0;font-size:1.05rem;text-shadow:0 1px 18px rgba(0,0,0,.4)}
+  .chap .actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .chap.on{pointer-events:auto}
+
+  .rail{position:absolute;right:max(20px,calc((100vw - var(--max))/2 + 20px));top:50%;transform:translateY(-50%);z-index:7;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px;align-items:flex-end}
+  .rail li{display:flex;align-items:center;gap:12px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45);transition:color .4s}
+  .rail li i{display:block;width:26px;height:1px;background:currentColor;transition:width .4s}
+  .rail li.on{color:#fff}
+  .rail li.on i{width:56px;background:var(--gold-2)}
+  @media (max-width:760px){.rail li span{display:none}.rail{right:14px;gap:16px}}
+
+  .cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:7;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.8);display:flex;flex-direction:column;align-items:center;gap:10px;transition:opacity .4s;pointer-events:none}
+  .cue i{display:block;width:1px;height:38px;background:linear-gradient(180deg,rgba(255,255,255,.9),transparent);animation:cue 1.8s ease-in-out infinite}
+  @keyframes cue{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(.2);transform-origin:bottom}}
+
+  @media (prefers-reduced-motion:reduce){.cue i{animation:none}}
+
+  /* ---------- Après la scène ---------- */
+  .after{background:#14181A;color:var(--ivory);padding:110px 0 120px}
+  .after .lead{color:#C9C4B8}
+  .after .pillar{border-top-color:#2B302F}
+  .after .pillar p{color:#A9A398}
+</style>
+</head>
+<body data-page="vente">
+
+<main>
+  <section class="story" id="story" aria-label="Présentation de Flex by Tsiry">
+    <div class="stage" id="stage">
+      <div class="sun" id="sun" aria-hidden="true"></div>
+      <div id="layers" aria-hidden="true"></div>
+      <div class="mist" aria-hidden="true"></div>
+      <canvas id="snow" aria-hidden="true"></canvas>
+      <div class="shade" aria-hidden="true"></div>
+
+      <div class="chap" data-c="0">
+        <div class="in">
+          <h1>Vos vacances, <em>notre priorité.</em></h1>
+          <p class="sub">Des leçons privées sur mesure, à Courchevel, Megève puis Val d'Isère. Des packages à la semaine, ou le temps d'un week-end.</p>
+          <div class="actions">
+            <a class="btn light" href="reserver.html">Réserver votre semaine</a>
+            <button class="btn ghost-light" type="button" id="discover">Découvrir la saison</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="chap" data-c="1">
+        <div class="in">
+          <span class="count">01 / 03</span>
+          <p class="when">15 décembre — début janvier</p>
+          <h2>Courchevel</h2>
+          <p class="sub">La saison s'ouvre avec les fêtes de fin d'année.</p>
+        </div>
+      </div>
+
+      <div class="chap" data-c="2">
+        <div class="in">
+          <span class="count">02 / 03</span>
+          <p class="when">Mi-janvier — fin février</p>
+          <h2>Megève</h2>
+          <p class="sub">Le cœur de l'hiver.</p>
+        </div>
+      </div>
+
+      <div class="chap" data-c="3">
+        <div class="in">
+          <span class="count">03 / 03</span>
+          <p class="when">Fin février — début mai</p>
+          <h2>Val d'Isère</h2>
+          <p class="sub">La haute altitude pour finir la saison.</p>
+        </div>
+      </div>
+
+      <ol class="rail" id="rail" aria-hidden="true">
+        <li><i></i><span>Flex</span></li>
+        <li><i></i><span>Courchevel</span></li>
+        <li><i></i><span>Megève</span></li>
+        <li><i></i><span>Val d'Isère</span></li>
+      </ol>
+      <div class="cue" id="cue" aria-hidden="true">Faites défiler<i></i></div>
+      <div class="fadeout" id="fadeout"></div>
+    </div>
+  </section>
+
+  <section class="after">
+    <div class="wrap">
+      <div class="center reveal" style="margin-bottom:60px">
+        <span class="eyebrow">Flex by Tsiry</span>
+        <h2>L'expérience du luxe alpin<br>à travers le ski.</h2>
+        <p class="lead">Des leçons privées uniquement : le programme est construit pour votre famille, et le moniteur vous retrouve de station en station.</p>
+      </div>
+      <div class="grid g3">
+        <div class="pillar reveal"><span class="num">I</span><h3>Leçons privées</h3><p>Pas de groupe : votre famille a son moniteur pour elle seule.</p></div>
+        <div class="pillar reveal"><span class="num">II</span><h3>La semaine ou le week-end</h3><p>Des packages de cinq jours minimum, avec une option samedi-dimanche.</p></div>
+        <div class="pillar reveal"><span class="num">III</span><h3>Trois stations</h3><p>Courchevel, Megève puis Val d'Isère, selon la période de votre séjour.</p></div>
+      </div>
+      <div class="center reveal" style="margin-top:60px">
+        <a class="btn light" href="reserver.html">Réserver votre semaine</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/site.js"></script>
+<script>
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const story = document.getElementById('story'), stage = document.getElementById('stage');
+  const layersEl = document.getElementById('layers'), sun = document.getElementById('sun');
+  const chaps = [...document.querySelectorAll('.chap')], rail = [...document.querySelectorAll('#rail li')];
+  const cue = document.getElementById('cue'), fadeout = document.getElementById('fadeout');
+  const NAV = 72;
+
+  /* --- Relief : crêtes générées (déplacement du point milieu, graine fixe) --- */
+  const rng = s => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  function ridge(seed, rough) {
+    const r = rng(seed); let pts = [r(), r()], amp = 1;
+    for (let k = 0; k < 7; k++) {
+      const out = [];
+      for (let i = 0; i < pts.length - 1; i++) { out.push(pts[i]); out.push((pts[i] + pts[i + 1]) / 2 + (r() - .5) * amp); }
+      out.push(pts[pts.length - 1]); pts = out; amp *= rough;
+    }
+    const mn = Math.min(...pts), mx = Math.max(...pts);
+    return pts.map(v => (v - mn) / (mx - mn));
+  }
+  const LAYERS = [
+    { seed: 7,  high: .10, low: .52, rough: .56, k: .05, dx: -1.5 },
+    { seed: 19, high: .26, low: .64, rough: .52, k: .12, dx:  2 },
+    { seed: 33, high: .44, low: .78, rough: .50, k: .22, dx: -3 },
+    { seed: 58, high: .62, low: .92, rough: .48, k: .36, dx:  4 }
+  ];
+  layersEl.innerHTML = '';
+  const nodes = LAYERS.map((L, i) => {
+    const pts = ridge(L.seed, L.rough), W = 1600, H = 1000;
+    let d = 'M0,' + H;
+    pts.forEach((n, j) => { d += ' L' + (j / (pts.length - 1) * W).toFixed(1) + ',' + (H * (L.low - n * (L.low - L.high))).toFixed(1); });
+    d += ' L' + W + ',' + H + ' Z';
+    const el = document.createElement('div'); el.className = 'layer';
+    el.innerHTML = '<svg viewBox="0 0 1600 1000" preserveAspectRatio="none"><defs><linearGradient id="lg' + i + '" x1="0" y1="0" x2="0" y2="1">' +
+      '<stop offset="0" style="stop-color:var(--snow)"/><stop offset=".2" style="stop-color:var(--m' + (i + 1) + ')"/><stop offset="1" style="stop-color:var(--m' + (i + 1) + ')"/></linearGradient></defs>' +
+      '<path d="' + d + '" fill="url(#lg' + i + ')"/></svg>';
+    layersEl.appendChild(el); return el;
+  });
+
+  /* --- Palettes : l'ambiance change de station en station --- */
+  const PAL = [
+    { at: 0,   sky: ['#0b0f16', '#1d2940', '#8f6f60'], sun: '#f3cfa0', m: ['#4b5770', '#38435a', '#262e41', '#12171f'], snow: '#c9d3e4' },
+    { at: .35, sky: ['#101826', '#34476a', '#e6b98f'], sun: '#f7d9aa', m: ['#6a7894', '#4c5974', '#2f3a52', '#161c29'], snow: '#e3e9f4' },
+    { at: .62, sky: ['#2b2420', '#8d6e56', '#f3d6a8'], sun: '#fff0c9', m: ['#a08c78', '#7a6652', '#4d4036', '#211b17'], snow: '#fff4e0' },
+    { at: .88, sky: ['#0f2a40', '#4f86a8', '#cfe7ef'], sun: '#ffffff', m: ['#a6c2d0', '#7497ab', '#3b576b', '#142430'], snow: '#ffffff' }
+  ];
+  const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const mix = (a, b, t) => { const x = hex(a), y = hex(b); return 'rgb(' + x.map((v, i) => Math.round(v + (y[i] - v) * t)).join(',') + ')'; };
+  const ease = t => t * t * (3 - 2 * t);
+  function palette(p) {
+    let i = 0; while (i < PAL.length - 2 && p > PAL[i + 1].at) i++;
+    const a = PAL[i], b = PAL[i + 1], t = ease(Math.min(1, Math.max(0, (p - a.at) / (b.at - a.at))));
+    const s = stage.style;
+    a.sky.forEach((c, j) => s.setProperty('--sky' + j, mix(c, b.sky[j], t)));
+    a.m.forEach((c, j) => s.setProperty('--m' + (j + 1), mix(c, b.m[j], t)));
+    s.setProperty('--sun', mix(a.sun, b.sun, t)); s.setProperty('--snow', mix(a.snow, b.snow, t));
+  }
+
+  /* --- Chapitres : opacité selon la progression --- */
+  const RANGES = [[-1, .1, .22], [.26, .44, .06], [.52, .70, .06], [.77, 1.1, .05]];
+  const vis = (p, a, b, f) => Math.max(0, Math.min(1, Math.min((p - a) / f, (b - p) / f, 1)));
+
+  function apply(p) {
+    palette(p);
+    const H = stage.clientHeight;
+    nodes.forEach((n, i) => { const L = LAYERS[i]; n.style.transform = 'translate3d(' + (L.dx * p).toFixed(2) + 'vw,' + (L.k * p * H).toFixed(1) + 'px,0) scale(' + (1 + p * L.k * .25).toFixed(4) + ')'; });
+    sun.style.left = (74 - 52 * p) + '%';
+    sun.style.top = (30 - 12 * Math.sin(Math.PI * Math.min(1, p * 1.1))) + '%';
+    let best = 0, bo = -1;
+    chaps.forEach((c, i) => {
+      const [a, b, f] = RANGES[i], o = vis(p, a, b, f);
+      c.style.opacity = o; c.style.transform = 'translate3d(0,' + ((1 - o) * 28).toFixed(1) + 'px,0)';
+      c.classList.toggle('on', o > .5);
+      if (o > bo) { bo = o; best = i; }
+    });
+    rail.forEach((li, i) => li.classList.toggle('on', i === best));
+    cue.style.opacity = Math.max(0, 1 - p * 18);
+    fadeout.style.opacity = Math.max(0, Math.min(1, (p - .93) / .07));
+  }
+
+  /* --- Progression de scroll, lissée --- */
+  let target = 0, cur = 0;
+  function readTarget() {
+    const scrollable = story.offsetHeight - stage.offsetHeight;
+    target = Math.max(0, Math.min(1, (NAV - story.getBoundingClientRect().top) / scrollable));
+  }
+
+  /* --- Neige --- */
+  const cv = document.getElementById('snow'), cx = cv.getContext('2d');
+  let flakes = [], W = 0, Hh = 0, lastY = scrollY, vel = 0;
+  function size() {
+    const r = stage.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; Hh = r.height; cv.width = W * dpr; cv.height = Hh * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = Math.round(W * Hh / 14000);
+    flakes = Array.from({ length: Math.min(110, n) }, () => ({ x: Math.random() * W, y: Math.random() * Hh, r: .6 + Math.random() * 1.8, s: .3 + Math.random() * .9, d: Math.random() * 6.28 }));
+  }
+  function drawSnow() {
+    cx.clearRect(0, 0, W, Hh); cx.fillStyle = 'rgba(255,255,255,.85)';
+    const boost = 1 + Math.min(6, Math.abs(vel) * .35);
+    flakes.forEach(f => {
+      f.d += .01; f.y += f.s * boost; f.x += Math.sin(f.d) * .35;
+      if (f.y > Hh + 4) { f.y = -4; f.x = Math.random() * W; }
+      cx.globalAlpha = .35 + f.r / 3; cx.beginPath(); cx.arc(f.x, f.y, f.r, 0, 6.283); cx.fill();
+    });
+  }
+
+  let visible = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver(e => { visible = e[0].isIntersecting; }, { threshold: 0 }).observe(story);
+
+  function loop() {
+    if (visible) {
+      readTarget();
+      cur = reduce ? target : cur + (target - cur) * .1;
+      if (Math.abs(target - cur) < .0003) cur = target;
+      apply(cur);
+      vel = vel * .85 + (scrollY - lastY) * .15; lastY = scrollY;
+      if (!reduce) drawSnow();
+    }
+    requestAnimationFrame(loop);
+  }
+  size(); readTarget(); cur = target; apply(cur); loop();
+  addEventListener('resize', () => { size(); readTarget(); });
+
+  document.getElementById('discover').addEventListener('click', () => {
+    const scrollable = story.offsetHeight - stage.offsetHeight;
+    const y = story.getBoundingClientRect().top + scrollY - NAV + .35 * scrollable;
+    scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>

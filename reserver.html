@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Réserver · Flex by Tsiry</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .book{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;padding:60px 24px 100px}
+  .book > *{min-width:0}
+  @media (max-width:1080px){.book{grid-template-columns:1fr}.summary{position:static}}
+  .steps{display:flex;gap:0;margin-bottom:40px;border-bottom:1px solid var(--line);overflow-x:auto}
+  .steps span{flex:0 0 auto;padding:0 22px 14px 0;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+  .steps span.on{color:var(--ink);border-color:var(--gold)}
+  .steps span.done{color:var(--gold)}
+  .step{display:none;animation:fade .5s ease}
+  .step.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .choice{display:grid;gap:14px}
+  .opt{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid var(--line);background:var(--snow);padding:22px 24px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+  .opt:hover{border-color:var(--gold-2)}
+  .opt.sel{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+  .opt h4{font-size:1.45rem;margin:0}
+  .opt p{margin:4px 0 0;font-size:.88rem;color:var(--muted)}
+  .opt .p{font-family:var(--serif);font-size:1.6rem;white-space:nowrap;text-align:right}
+  .opt .p small{display:block;font-family:var(--sans);font-size:.72rem;color:var(--muted)}
+  .stations{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:640px){.stations{grid-template-columns:1fr}}
+  .st{position:relative;height:150px;overflow:hidden;cursor:pointer;border:2px solid transparent;color:#fff}
+  .st .art{position:absolute;inset:0}
+  .st::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.65))}
+  .st div.t{position:absolute;left:16px;bottom:12px;z-index:2}
+  .st div.t strong{font-family:var(--serif);font-size:1.5rem;font-weight:500;display:block}
+  .st div.t span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase}
+  .st.sel{border-color:var(--gold)}
+  .st.off{opacity:.35;cursor:not-allowed}
+  .counter{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid var(--line)}
+  .counter .ctl{display:flex;align-items:center;gap:16px}
+  .counter button{width:40px;height:40px;border:1px solid var(--line);background:var(--snow);cursor:pointer;font-size:1.1rem}
+  .counter output{min-width:20px;text-align:center;font-family:var(--serif);font-size:1.4rem}
+  .actions{display:flex;justify-content:space-between;gap:12px;margin-top:36px;flex-wrap:wrap}
+  .summary{position:sticky;top:120px;background:var(--night);color:var(--ivory);padding:34px}
+  .summary h3{color:#fff}
+  .summary .row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #2B302F;font-size:.92rem}
+  .summary .row span:first-child{color:#A9A398}
+  .summary .total{font-family:var(--serif);font-size:2.4rem;margin-top:20px}
+  .summary .ht{font-size:.82rem;color:#A9A398}
+  .check{display:flex;gap:12px;align-items:flex-start;font-size:.92rem;margin:12px 0}
+  .check input{width:auto;margin-top:5px}
+  .paybox{border:1px solid var(--line);background:var(--snow);padding:26px}
+  .demo-pay{background:var(--ivory);border:1px dashed var(--gold);padding:18px;font-size:.9rem;margin-bottom:18px}
+  .confirm{text-align:center;max-width:720px;margin:0 auto;padding:90px 24px 120px}
+  .confirm .seal{width:90px;height:90px;margin:0 auto 28px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2.2rem;color:var(--gold)}
+  .confirm .ref{display:inline-block;margin:18px 0 30px;padding:10px 18px;border:1px solid var(--line);letter-spacing:.2em;font-size:.82rem}
+  .confirm .recap{text-align:left;margin:30px auto;max-width:520px}
+  .err{color:var(--warn);font-size:.85rem;min-height:1.2em;margin-top:10px}
+</style>
+</head>
+<body data-page="reserver">
+
+<main id="flow">
+  <div class="page-head" style="padding:60px 0 40px">
+    <div class="wrap">
+      <span class="eyebrow">Réservation</span>
+      <h1 style="font-size:clamp(2.2rem,5vw,3.6rem)">Composons votre semaine</h1>
+      <p class="lead">Cinq étapes, trois minutes. Démo : aucun paiement n'est encaissé.</p>
+    </div>
+  </div>
+
+  <div class="wrap book">
+    <div>
+      <div class="steps" id="steps">
+        <span>1 · Formule</span><span>2 · Station et dates</span><span>3 · Votre famille</span><span>4 · Coordonnées</span><span>5 · Paiement</span>
+      </div>
+
+      <!-- 1 -->
+      <div class="step" data-step="1">
+        <h2 style="font-size:2rem">Quelle formule vous ressemble ?</h2>
+        <div class="choice" id="offer-list"></div>
+        <label class="check" style="margin-top:22px"><input type="checkbox" id="ext"> <span>Ajouter la prolongation week-end (samedi et dimanche après la semaine) : <strong id="ext-p"></strong> TTC</span></label>
+        <p class="form-note">La prolongation ne s'applique qu'aux formules à la semaine.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="step" data-step="2">
+        <h2 style="font-size:2rem">Où et quand ?</h2>
+        <p class="muted">Choisissez la date d'arrivée : la station correspondant à la période est sélectionnée automatiquement.</p>
+        <div class="field" style="max-width:320px"><label for="date">Premier jour de leçon</label><input type="date" id="date" min="2026-12-15" max="2027-05-01"></div>
+        <div class="stations" id="stations"></div>
+        <p class="err" id="err2"></p>
+      </div>
+
+      <!-- 3 -->
+      <div class="step" data-step="3">
+        <h2 style="font-size:2rem">Qui skiera avec nous ?</h2>
+        <p class="muted">Jusqu'à 5 skieurs d'une même famille sont compris dans le prix.</p>
+        <div class="counter"><div><strong>Adultes</strong><div class="muted" style="font-size:.85rem">18 ans et plus</div></div><div class="ctl"><button type="button" data-c="adults" data-d="-1" aria-label="Retirer un adulte">−</button><output id="adults">2</output><button type="button" data-c="adults" data-d="1" aria-label="Ajouter un adulte">+</button></div></div>
+        <div class="counter"><div><strong>Enfants</strong><div class="muted" style="font-size:.85rem">de 4 à 17 ans</div></div><div class="ctl"><button type="button" data-c="kids" data-d="-1" aria-label="Retirer un enfant">−</button><output id="kids">2</output><button type="button" data-c="kids" data-d="1" aria-label="Ajouter un enfant">+</button></div></div>
+        <div class="field" style="margin-top:24px"><label for="level">Niveau global de la famille</label>
+          <select id="level"><option>Grands débutants</option><option selected>Niveaux mélangés</option><option>Intermédiaires, pistes rouges</option><option>Confirmés, envie de hors-piste</option></select></div>
+        <div class="field"><label for="lang">Langue des leçons</label><select id="lang"><option>Français</option><option>English</option></select></div>
+        <p class="err" id="err3"></p>
+      </div>
+
+      <!-- 4 -->
+      <div class="step" data-step="4">
+        <h2 style="font-size:2rem">Vos coordonnées</h2>
+        <p class="muted">Démo : utilisez des informations fictives. Rien n'est envoyé.</p>
+        <div class="grid g2" style="gap:0 18px">
+          <div class="field"><label for="fn">Prénom</label><input id="fn" autocomplete="off" placeholder="Claire"></div>
+          <div class="field"><label for="ln">Nom</label><input id="ln" autocomplete="off" placeholder="Dumont"></div>
+          <div class="field"><label for="em">Courriel</label><input id="em" type="email" autocomplete="off" placeholder="claire@exemple.com"></div>
+          <div class="field"><label for="ph">Téléphone</label><input id="ph" autocomplete="off" placeholder="+44 7000 000000"></div>
+          <div class="field"><label for="ct">Pays de résidence</label><select id="ct"><option>France</option><option>Royaume-Uni</option><option>Belgique</option><option>Suisse</option><option>États-Unis</option><option>Pays-Bas</option><option>Autre</option></select></div>
+          <div class="field"><label for="hotel">Hébergement (facultatif)</label><input id="hotel" autocomplete="off" placeholder="Chalet, hôtel…"></div>
+        </div>
+        <div class="field"><label for="note">Un mot pour votre moniteur (facultatif)</label><textarea id="note" placeholder="Notre fille a un peu peur de la vitesse…"></textarea></div>
+        <p class="err" id="err4"></p>
+      </div>
+
+      <!-- 5 -->
+      <div class="step" data-step="5">
+        <h2 style="font-size:2rem">Paiement</h2>
+        <div class="paybox">
+          <div class="demo-pay"><strong>Paiement simulé.</strong> Ce site est un projet étudiant : aucune carte n'est demandée et aucun montant n'est débité. Le bouton ci-dessous simule un paiement accepté.</div>
+          <div class="row" style="display:flex;justify-content:space-between;padding:8px 0"><span>Acompte de 30 % à la réservation</span><strong id="deposit"></strong></div>
+          <div class="row" style="display:flex;justify-content:space-between;padding:8px 0;color:var(--muted)"><span>Solde, 30 jours avant le séjour</span><span id="balance"></span></div>
+          <label class="check"><input type="checkbox" id="cgv"> <span>J'accepte les conditions d'annulation : sans frais jusqu'à 30 jours avant, 50 % retenus entre 30 et 8 jours.</span></label>
+        </div>
+        <p class="err" id="err5"></p>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" id="prev" type="button">Retour</button>
+        <button class="btn" id="next" type="button">Continuer</button>
+      </div>
+    </div>
+
+    <aside class="summary" aria-live="polite">
+      <span class="eyebrow">Votre séjour</span>
+      <h3 id="s-name">Choisissez une formule</h3>
+      <div class="row"><span>Station</span><span id="s-st">À définir</span></div>
+      <div class="row"><span>Dates</span><span id="s-dt">À définir</span></div>
+      <div class="row"><span>Skieurs</span><span id="s-sk">2 adultes, 2 enfants</span></div>
+      <div class="row"><span>Prolongation</span><span id="s-ex">Non</span></div>
+      <div class="total" id="s-total">0 €</div>
+      <div class="ht" id="s-ht">TTC</div>
+      <p style="font-size:.8rem;color:#A9A398;margin-top:18px">Forfaits et matériel non compris. La conciergerie les réserve pour vous.</p>
+    </aside>
+  </div>
+</main>
+
+<div id="done" hidden></div>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  const S = { step:1, offer:null, ext:false, date:'', station:'', adults:2, kids:2 };
+  const STATIONS = [
+    { id:'Courchevel', art:'courchevel', from:'2026-12-15', to:'2027-01-09', label:'15 déc. – 9 janv.' },
+    { id:'Megève', art:'megeve', from:'2027-01-16', to:'2027-02-26', label:'16 janv. – 26 févr.' },
+    { id:"Val d'Isère", art:'valdisere', from:'2027-02-27', to:'2027-05-01', label:'27 févr. – 1er mai' }
+  ];
+  const $ = id => document.getElementById(id);
+  const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+  const addDays = (d, n) => { const x = new Date(d + 'T12:00:00'); x.setDate(x.getDate() + n); return x.toISOString().slice(0,10); };
+
+  // Formules
+  $('offer-list').innerHTML = FLEX_OFFERS.map(o =>
+    '<div class="opt" tabindex="0" role="radio" aria-checked="false" data-id="' + o.id + '"><div><h4>' + o.name + '</h4><p>' + o.sub + ' · ' + o.hours + '</p></div>' +
+    '<div class="p">' + flexEur(o.ttc) + '<small>TTC · ' + flexEur(flexHT(o.ttc)) + ' HT</small></div></div>').join('');
+  $('ext-p').textContent = flexEur(FLEX_EXT.ttc);
+  function pickOffer(id){
+    S.offer = FLEX_OFFERS.find(o => o.id === id);
+    document.querySelectorAll('.opt').forEach(el => { const on = el.dataset.id === id; el.classList.toggle('sel', on); el.setAttribute('aria-checked', on); });
+    if (S.offer.id === 'weekend') { S.ext = false; $('ext').checked = false; }
+    $('ext').disabled = S.offer.id === 'weekend';
+    render();
+  }
+  document.querySelectorAll('.opt').forEach(el => {
+    el.addEventListener('click', () => pickOffer(el.dataset.id));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pickOffer(el.dataset.id); } });
+  });
+  $('ext').addEventListener('change', e => { S.ext = e.target.checked; render(); });
+  const pre = new URLSearchParams(location.search).get('formule');
+  if (pre && FLEX_OFFERS.some(o => o.id === pre)) pickOffer(pre);
+
+  // Stations
+  $('stations').innerHTML = STATIONS.map(s => '<div class="st" data-id="' + s.id + '"><div class="art" data-art="' + s.art + '"></div><div class="t"><strong>' + s.id + '</strong><span>' + s.label + '</span></div></div>').join('');
+  document.querySelectorAll('#stations .art').forEach(el => el.innerHTML = flexMountain(el.dataset.art));
+  document.querySelectorAll('.st').forEach(el => el.addEventListener('click', () => {
+    const s = STATIONS.find(x => x.id === el.dataset.id);
+    if (!S.date || S.date < s.from || S.date > s.to) { S.date = s.from; $('date').value = s.from; }
+    S.station = s.id; render();
+  }));
+  $('date').addEventListener('change', e => {
+    S.date = e.target.value;
+    const s = STATIONS.find(x => S.date >= x.from && S.date <= x.to);
+    S.station = s ? s.id : '';
+    $('err2').textContent = s ? '' : 'Cette date tombe entre deux périodes (10 – 15 janvier). Choisissez une date dans l\'une des trois périodes.';
+    render();
+  });
+
+  // Compteurs
+  document.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => {
+    const k = b.dataset.c, d = +b.dataset.d, min = k === 'adults' ? 1 : 0;
+    const next = S[k] + d;
+    if (next < min) return;
+    if (S.adults + S.kids + d > 5 && d > 0) { $('err3').textContent = 'Le prix comprend jusqu\'à 5 skieurs. Pour un groupe plus grand, écrivez à la conciergerie.'; return; }
+    $('err3').textContent = ''; S[k] = next; render();
+  }));
+
+  function total(){ return S.offer ? S.offer.ttc + (S.ext ? FLEX_EXT.ttc : 0) : 0; }
+  function endDate(){
+    if (!S.date || !S.offer) return '';
+    const n = (S.offer.id === 'weekend' ? 2 : 5) + (S.ext ? 2 : 0);
+    return addDays(S.date, n - 1);
+  }
+  function render(){
+    document.querySelectorAll('.step').forEach(el => el.classList.toggle('on', +el.dataset.step === S.step));
+    document.querySelectorAll('#steps span').forEach((el, i) => { el.className = i + 1 === S.step ? 'on' : (i + 1 < S.step ? 'done' : ''); });
+    document.querySelectorAll('.st').forEach(el => el.classList.toggle('sel', el.dataset.id === S.station));
+    $('adults').textContent = S.adults; $('kids').textContent = S.kids;
+    $('s-name').textContent = S.offer ? S.offer.name : 'Choisissez une formule';
+    $('s-st').textContent = S.station || 'À définir';
+    $('s-dt').textContent = S.date && S.offer ? 'du ' + fmtDate(S.date) + ' au ' + fmtDate(endDate()) : 'À définir';
+    $('s-sk').textContent = S.adults + ' adulte' + (S.adults > 1 ? 's' : '') + (S.kids ? ', ' + S.kids + ' enfant' + (S.kids > 1 ? 's' : '') : '');
+    $('s-ex').textContent = S.ext ? 'Oui, ' + flexEur(FLEX_EXT.ttc) : 'Non';
+    const t = total();
+    $('s-total').textContent = flexEur(t);
+    $('s-ht').textContent = 'TTC · soit ' + flexEur(flexHT(t)) + ' HT (TVA 20 %)';
+    $('deposit').textContent = flexEur(Math.round(t * 0.3));
+    $('balance').textContent = flexEur(t - Math.round(t * 0.3));
+    $('prev').style.visibility = S.step === 1 ? 'hidden' : 'visible';
+    $('next').textContent = S.step === 5 ? 'Payer ' + flexEur(Math.round(t * 0.3)) + ' (simulation)' : 'Continuer';
+  }
+
+  function validate(){
+    if (S.step === 1 && !S.offer) { flexToast('Choisissez une formule pour continuer.'); return false; }
+    if (S.step === 2) {
+      if (!S.date || !S.station) { $('err2').textContent = 'Choisissez une date ou une station.'; return false; }
+      const s = STATIONS.find(x => x.id === S.station);
+      if (endDate() > s.to) { $('err2').textContent = 'Le séjour dépasserait la fin de la période à ' + s.id + ' (' + s.label + '). Choisissez une date plus tôt.'; return false; }
+      if (S.offer.id === 'weekend' && new Date(S.date + 'T12:00:00').getDay() !== 6) { $('err2').textContent = 'La formule Le Week-end commence un samedi.'; return false; }
+      $('err2').textContent = '';
+    }
+    if (S.step === 4) {
+      const ok = $('fn').value.trim() && $('ln').value.trim() && /.+@.+\..+/.test($('em').value);
+      $('err4').textContent = ok ? '' : 'Prénom, nom et un courriel valide sont nécessaires.';
+      return !!ok;
+    }
+    if (S.step === 5 && !$('cgv').checked) { $('err5').textContent = 'Merci d\'accepter les conditions d\'annulation.'; return false; }
+    return true;
+  }
+
+  $('next').addEventListener('click', () => {
+    if (!validate()) return;
+    if (S.step < 5) { S.step++; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    pay();
+  });
+  $('prev').addEventListener('click', () => { if (S.step > 1) { S.step--; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); } });
+
+  function pay(){
+    const btn = $('next'); btn.disabled = true; btn.textContent = 'Paiement en cours…';
+    setTimeout(() => {
+      const ref = 'FLX-' + Date.now().toString(36).toUpperCase().slice(-6);
+      const order = {
+        type:'order', ref, date:new Date().toISOString(),
+        name: $('fn').value.trim() + ' ' + $('ln').value.trim(), email: $('em').value.trim(), phone: $('ph').value.trim(),
+        country: $('ct').value, hotel: $('hotel').value.trim(), note: $('note').value.trim(),
+        offer: S.offer.name + (S.ext ? ' + prolongation week-end' : ''), station: S.station, start: S.date, end: endDate(),
+        adults: S.adults, kids: S.kids, level: $('level').value, lang: $('lang').value, ttc: total(), deposit: Math.round(total() * 0.3)
+      };
+      try { const a = JSON.parse(localStorage.getItem('flex_inbound') || '[]'); a.push(order); localStorage.setItem('flex_inbound', JSON.stringify(a)); } catch (e) {}
+      document.getElementById('flow').hidden = true;
+      const d = document.getElementById('done'); d.hidden = false;
+      d.innerHTML = '<div class="confirm"><div class="seal">✓</div><span class="eyebrow">Réservation confirmée · démo</span>' +
+        '<h1 style="font-size:clamp(2.2rem,5vw,3.4rem)">Merci, ' + $('fn').value.trim().replace(/[<>&]/g,'') + '. Votre semaine est réservée.</h1>' +
+        '<p class="lead" style="margin:0 auto">Votre moniteur vous appelle sous 24 heures pour faire connaissance avec chaque skieur et préparer le premier matin.</p>' +
+        '<div class="ref">Référence ' + ref + '</div>' +
+        '<dl class="kv recap card"><dt>Formule</dt><dd>' + order.offer + '</dd><dt>Station</dt><dd>' + order.station + '</dd><dt>Dates</dt><dd>du ' + fmtDate(order.start) + ' au ' + fmtDate(order.end) + '</dd><dt>Skieurs</dt><dd>' + $('s-sk').textContent + '</dd><dt>Total</dt><dd>' + flexEur(order.ttc) + ' TTC</dd><dt>Acompte simulé</dt><dd>' + flexEur(order.deposit) + '</dd></dl>' +
+        '<p class="form-note">Aucun paiement n\'a été encaissé. Cette réservation apparaît maintenant dans le CRM de démonstration, étape « Gagné ».</p>' +
+        '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px"><a class="btn" href="crm.html">Voir dans le CRM</a><a class="btn ghost" href="index.html">Retour à l\'accueil</a></div></div>';
+      window.scrollTo({ top: 0 });
+    }, 1400);
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>

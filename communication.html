@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan de communication · Flex by Tsiry</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media (max-width:980px){.posts{grid-template-columns:1fr 1fr}}
+  @media (max-width:640px){.posts{grid-template-columns:1fr}}
+  .post{background:var(--snow);border:1px solid var(--line);display:flex;flex-direction:column}
+  .visual{position:relative;overflow:hidden;color:#fff;aspect-ratio:1/1}
+  .visual.v916{aspect-ratio:4/5}
+  .visual.li{aspect-ratio:1.91/1}
+  .visual .art{position:absolute;inset:0}
+  .visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.55))}
+  .visual .ov{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;padding:22px}
+  .visual .ov .top{display:flex;justify-content:space-between;align-items:center;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase}
+  .visual .ov .top svg{width:26px;height:26px}
+  .visual .ov h4{font-family:var(--serif);font-size:1.7rem;font-weight:400;line-height:1.1;margin:0}
+  .visual .ov h4 em{color:var(--gold-2)}
+  .visual .ov .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:54px;height:54px;border:1px solid rgba(255,255,255,.8);border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .post .body{padding:20px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .post .head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .net{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;color:#fff}
+  .net.ig{background:#8C5A6E}.net.li{background:#2E4E6E}.net.tt{background:#1B1B1B}
+  .post .txt{font-size:.88rem;white-space:pre-line;color:var(--ink-2);border-left:2px solid var(--line);padding-left:12px}
+  .post dl{display:grid;grid-template-columns:90px 1fr;gap:4px 10px;font-size:.8rem;margin:0}
+  .post dt{color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-size:.64rem;padding-top:2px}
+  .post dd{margin:0}
+  .copy{align-self:flex-start;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--line);background:var(--paper);padding:6px 10px;cursor:pointer}
+  .cal{display:grid;grid-template-columns:120px repeat(7,1fr);border:1px solid var(--line);background:var(--snow);min-width:860px}
+  .cal div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px;font-size:.78rem;min-height:74px}
+  .cal .h{background:var(--paper);font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:auto}
+  .cal .w{background:var(--paper);font-weight:500}
+  .cal .w small{display:block;color:var(--muted);font-weight:400}
+  .ev{display:block;padding:4px 6px;margin-bottom:4px;font-size:.72rem;line-height:1.3;color:#fff}
+  .ev.ig{background:#8C5A6E}.ev.li{background:#2E4E6E}.ev.tt{background:#1B1B1B}.ev.off{background:var(--gold)}.ev.ml{background:#5E6E5A}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.78rem;margin-top:12px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:12px;height:12px;display:inline-block}
+  ol.steps10{counter-reset:s;list-style:none;padding:0;margin:0}
+  ol.steps10 li{counter-increment:s;position:relative;padding:18px 0 18px 64px;border-top:1px solid var(--line)}
+  ol.steps10 li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--serif);font-size:1.8rem;color:var(--gold)}
+</style>
+</head>
+<body data-page="communication">
+
+<header class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Espace entreprise · Plan de communication</span>
+    <h1 style="font-size:clamp(2.4rem,5vw,4rem)">Comment faire connaître Flex</h1>
+    <p class="lead">Tout ce qu'il faut pour lancer la communication dès demain matin : la marque, les canaux, 9 posts prêts à publier, le calendrier des quatre semaines avant l'ouverture, les partenariats et le plan pour les dix premières familles.</p>
+    <nav class="toc" aria-label="Sommaire">
+      <a href="#marque">Marque</a><a href="#canaux">Canaux</a><a href="#posts">9 posts</a><a href="#calendrier">Calendrier</a><a href="#partenariats">Partenariats</a><a href="#clients">10 premiers clients</a><a href="#indicateurs">Indicateurs</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+  <!-- MARQUE -->
+  <section id="marque">
+    <div class="wrap">
+      <span class="eyebrow">01 · Plateforme de marque</span>
+      <h2>Flex by Tsiry</h2>
+      <div class="grid g2" style="margin-top:32px">
+        <div class="card">
+          <dl class="kv">
+            <dt>Nom</dt><dd><strong>Flex</strong> : la flexion, le geste de base du skieur, et la souplesse d'un programme qui s'adapte à chaque membre de la famille. « by Tsiry » rappelle qu'il y a une personne, un moniteur, derrière la marque.</dd>
+            <dt>Promesse</dt><dd>Pour les familles qui veulent progresser ensemble sans perdre une heure de leurs vacances : un moniteur privé, le même toute la semaine, et rien à organiser.</dd>
+            <dt>Ton</dt><dd>Celui d'un concierge de grand hôtel : chaleureux, discret, précis. On vouvoie, on ne crie pas, on ne promet pas l'impossible. Bilingue français et anglais.</dd>
+            <dt>Charte</dt><dd>Ivoire, noir et or. Typographies Cormorant Garamond (titres) et Jost (texte). Paysages sobres, beaucoup d'espace.</dd>
+          </dl>
+        </div>
+        <div>
+          <div class="pillar"><span class="num">Message 1</span><h3 style="font-size:1.4rem">« Un seul moniteur, toute la semaine. »</h3><p class="muted">La continuité : il connaît chaque skieur dès le deuxième jour.</p></div>
+          <div class="pillar"><span class="num">Message 2</span><h3 style="font-size:1.4rem">« Toute la famille skie ensemble. »</h3><p class="muted">Les niveaux différents ne séparent plus la famille.</p></div>
+          <div class="pillar"><span class="num">Message 3</span><h3 style="font-size:1.4rem">« Vous n'avez rien à organiser. »</h3><p class="muted">Forfaits, matériel, table en altitude : la conciergerie s'en charge.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CANAUX -->
+  <section id="canaux" class="section-ivory">
+    <div class="wrap">
+      <span class="eyebrow">02 · Les canaux</span>
+      <h2>Être là où les familles préparent leur séjour</h2>
+      <div class="grid g3" style="margin-top:32px">
+        <div class="card"><span class="net ig">Instagram</span><h3 style="margin-top:14px">La vitrine</h3><p class="muted">Le réseau où la cible regarde les stations avant de partir et partage ses vacances. Format visuel, adapté au haut de gamme. Objectif : désir et prise de contact en message privé.</p></div>
+        <div class="card"><span class="net li">LinkedIn</span><h3 style="margin-top:14px">La crédibilité</h3><p class="muted">Les parents de la cible sont dirigeants et cadres supérieurs. C'est aussi le canal pour approcher les hôtels et agences de chalets partenaires. Objectif : confiance et partenariats.</p></div>
+        <div class="card"><span class="net tt">TikTok</span><h3 style="margin-top:14px">La portée</h3><p class="muted">Des conseils courts de moniteur pour les parents, repris ensuite en Reels. Objectif : faire connaître le nom à moindre coût.</p></div>
+      </div>
+      <p style="margin-top:28px"><strong>Hors réseaux :</strong> les conciergeries d'hôtels et agences de chalets (le canal le plus direct vers la cible), WhatsApp Business pour la clientèle étrangère, et une courte lettre d'information avant chaque période (Courchevel, Megève, Val d'Isère).</p>
+    </div>
+  </section>
+
+  <!-- POSTS -->
+  <section id="posts">
+    <div class="wrap">
+      <span class="eyebrow">03 · Posts prêts à publier</span>
+      <h2>9 posts sur 3 réseaux</h2>
+      <p class="muted" style="margin-bottom:36px">Les visuels ci-dessous sont les maquettes à publier ; ils seront remplacés par les photos de Tsiry sur les pistes lorsqu'elles seront disponibles. Bouton « Copier » pour récupérer le texte.</p>
+      <div class="posts" id="post-grid"></div>
+    </div>
+  </section>
+
+  <!-- CALENDRIER -->
+  <section id="calendrier" class="section-ivory">
+    <div class="wrap">
+      <span class="eyebrow">04 · Calendrier éditorial</span>
+      <h2>Quatre semaines avant l'ouverture</h2>
+      <p class="muted">Du lundi 16 novembre au dimanche 13 décembre 2026. Les leçons commencent le 15 décembre à Courchevel.</p>
+      <div class="table-wrap" style="margin-top:24px;border:0;background:transparent"><div class="cal" id="cal"></div></div>
+      <div class="legend"><span><i style="background:#8C5A6E"></i>Instagram</span><span><i style="background:#2E4E6E"></i>LinkedIn</span><span><i style="background:#1B1B1B"></i>TikTok</span><span><i style="background:#A6875A"></i>Partenaires, hors ligne</span><span><i style="background:#5E6E5A"></i>Lettre d'information</span></div>
+    </div>
+  </section>
+
+  <!-- PARTENARIATS -->
+  <section id="partenariats">
+    <div class="wrap">
+      <span class="eyebrow">05 · Partenariats possibles</span>
+      <h2>Cinq partenaires à approcher</h2>
+      <p class="muted">Aucun de ces partenaires ne travaille aujourd'hui avec Flex. Ce sont des cibles de démarchage, citées à titre d'exemple.</p>
+      <div class="table-wrap" style="margin-top:24px">
+        <table>
+          <thead><tr><th>Partenaire</th><th>Type</th><th>Ce que Flex leur propose</th><th>Ce qu'ils y gagnent</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Conciergeries des hôtels 5 étoiles</strong><br><span class="muted">par exemple à Courchevel 1850, Megève et Val d'Isère</span></td><td>Lieux</td><td>Une réponse clé en main aux demandes de cours privés pour familles, réservable par la conciergerie, avec 10 % de commission.</td><td>Un service fiable à proposer à leurs clients, sans gestion, et une commission.</td></tr>
+            <tr><td><strong>Agences de location de chalets de luxe</strong><br><span class="muted">par exemple Leo Trippi (Courchevel, Megève)</span></td><td>Marque</td><td>Une offre « semaine ski incluse » à ajouter à leurs séjours, et la mise en avant de leurs chalets dans nos vidéos.</td><td>Un argument de vente pour les familles et un panier moyen plus élevé.</td></tr>
+            <tr><td><strong>Carv</strong><br><span class="muted">capteurs d'analyse du ski</span></td><td>Marque</td><td>Des contenus co-signés « progresser en une semaine » et, plus tard, des bilans de progression basés sur leurs données.</td><td>Une vitrine auprès d'une clientèle aisée et internationale, et des cas d'usage concrets.</td></tr>
+            <tr><td><strong>Ski Club of Great Britain</strong></td><td>Association</td><td>Une remise de 5 % et une soirée d'information en ligne pour leurs membres familles.</td><td>Un avantage exclusif pour leurs adhérents et un contenu pour leur lettre.</td></tr>
+            <tr><td><strong>Créatrice ou créateur de contenu « voyage en famille »</strong><br><span class="muted">compte anglophone, 50 000 à 200 000 abonnés</span></td><td>Créateur</td><td>Une semaine Matinées offerte en échange de trois Reels et de stories pendant le séjour.</td><td>Un contenu haut de gamme pour son audience et une expérience pour sa famille.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 CLIENTS -->
+  <section id="clients" class="section-dark">
+    <div class="wrap split" style="align-items:start">
+      <div>
+        <span class="eyebrow">06 · Acquisition</span>
+        <h2>Trouver les dix premières familles</h2>
+        <p class="lead">En quatre semaines, avant l'ouverture du 15 décembre. On commence par les personnes qui connaissent déjà Tsiry, puis par ceux qui conseillent la cible au quotidien : les conciergeries.</p>
+      </div>
+      <ol class="steps10">
+        <li><strong>Familles 1 à 3, le réseau existant.</strong> Un message personnel à chaque famille ayant pris une leçon avec Tsiry à Megève la saison passée, avec un tarif fondateur (−10 %) valable jusqu'au 30 novembre.</li>
+        <li><strong>Familles 4 et 5, les conciergeries.</strong> Visite en personne de six hôtels 5 étoiles (deux par station) la semaine du 23 novembre, avec une plaquette et une proposition de commission.</li>
+        <li><strong>Familles 6 et 7, les agences de chalets.</strong> Rendez-vous avec trois agences pour intégrer la Semaine Grand Air à leurs séjours des fêtes.</li>
+        <li><strong>Famille 8, le parrainage.</strong> Chaque famille cliente qui recommande une autre famille reçoit une journée offerte lors de son prochain séjour.</li>
+        <li><strong>Famille 9, les clubs étrangers.</strong> Présentation en ligne aux familles adhérentes du Ski Club of Great Britain (si le partenariat est accepté).</li>
+        <li><strong>Famille 10, les réseaux.</strong> Les 9 posts, plus 300 € de publicité Instagram ciblée sur les parents de Londres, Bruxelles, Genève et Amsterdam qui suivent des comptes de stations, avec renvoi vers la réservation.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- INDICATEURS -->
+  <section id="indicateurs">
+    <div class="wrap">
+      <span class="eyebrow">07 · Indicateurs</span>
+      <h2>Savoir si la communication fonctionne</h2>
+      <div class="table-wrap" style="margin-top:24px">
+        <table>
+          <thead><tr><th>Indicateur</th><th>Ce qu'il mesure</th><th>Objectif à 4 semaines</th><th>Où le lire</th></tr></thead>
+          <tbody>
+            <tr><td>Demandes de contact</td><td>Messages privés, formulaires et appels reçus</td><td>40 demandes</td><td>CRM, étape « Nouveau »</td></tr>
+            <tr><td>Taux de conversion</td><td>Demandes transformées en réservations</td><td>25 %, soit 10 familles</td><td>Tableau de bord du CRM</td></tr>
+            <tr><td>Source des clients</td><td>Le canal qui amène les réservations</td><td>Au moins 50 % via partenaires et parrainage</td><td>CRM, champ « Source »</td></tr>
+            <tr><td>Taux d'engagement Instagram</td><td>Réactions et partages rapportés à la portée</td><td>Plus de 4 % par post</td><td>Statistiques Instagram</td></tr>
+            <tr><td>Clics vers la réservation</td><td>Visites de la page Réserver depuis les réseaux</td><td>400 clics</td><td>Liens suivis dans la bio et les posts</td></tr>
+            <tr><td>Coût par réservation</td><td>Dépense publicitaire ÷ réservations issues de la publicité</td><td>Moins de 150 €</td><td>Gestionnaire de publicités et CRM</td></tr>
+            <tr><td>Satisfaction</td><td>Note donnée par la famille en fin de semaine</td><td>9 / 10 en moyenne</td><td>Questionnaire du dernier jour</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="assets/site.js"></script>
+<script>
+(function(){
+  const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const POSTS = [
+    { net:'ig', n:'Instagram', fmt:'Reel 20 s, 9:16', date:'Mardi 17 novembre 2026, 18 h', obj:'Notoriété : présenter Flex', art:'hero', ratio:'v916', video:true,
+      title:'Un moniteur.<br><em>Toute la semaine.</em>',
+      text:'Un moniteur pour votre famille, du lundi au vendredi. Le même, chaque matin. 🏔️\n\nCet hiver : Courchevel pour les fêtes, Megève en janvier et février, Val d\'Isère jusqu\'en mai.\n\nOne instructor for your whole family, all week long.\n\nRéservation : lien en bio.\n#skifamille #courchevel #megeve #valdisere #skilessons' },
+    { net:'li', n:'LinkedIn', fmt:'Post texte + image', date:'Mercredi 18 novembre 2026, 8 h 30', obj:'Crédibilité : l\'histoire du fondateur', art:'megeve', ratio:'li',
+      title:'Pourquoi j\'ai créé <em>Flex</em>',
+      text:'Moniteur de ski à Megève, j\'ai vu la même scène des dizaines de fois : une famille en vacances, séparée chaque matin en trois cours de niveaux différents, avec un moniteur qui change d\'un jour à l\'autre.\n\nCet hiver, je lance Flex : un moniteur privé pour toute la famille, le même toute la semaine, et une conciergerie qui organise le reste.\n\nJe suis la saison : Courchevel, Megève puis Val d\'Isère.\n\nSi vous partez skier en famille cet hiver, ou si vous travaillez dans l\'hôtellerie de montagne, écrivons-nous.' },
+    { net:'tt', n:'TikTok', fmt:'Vidéo face caméra 30 s, 9:16', date:'Jeudi 19 novembre 2026, 19 h', obj:'Portée : conseil utile aux parents', art:'courchevel', ratio:'v916', video:true,
+      title:'3 erreurs des parents<br><em>le premier jour</em>',
+      text:'3 erreurs des parents le premier jour de ski 👇\n1. Des chaussures trop grandes « pour qu\'il grandisse dedans »\n2. Commencer à 9 h sans petit-déjeuner solide\n3. Vouloir monter tout en haut dès le premier jour\n\nMoniteur à Courchevel, Megève et Val d\'Isère. Plus de conseils sur le compte. #ski #parents #skitips' },
+    { net:'ig', n:'Instagram', fmt:'Carrousel 6 images, 4:5', date:'Mardi 24 novembre 2026, 18 h', obj:'Considération : montrer la semaine type', art:'megeve', ratio:'v916',
+      title:'Une semaine Flex,<br><em>jour par jour</em>',
+      text:'Une semaine Flex, jour par jour ➡️\nLundi : on fait connaissance, chacun sur ses skis.\nMardi : premiers virages ensemble.\nMercredi : la famille descend la même piste.\nJeudi : la journée « défi » choisie par les enfants.\nVendredi : la grande descente et la vidéo de la semaine.\n\nChaque soir : le carnet de progression.\n#skifamily #privateskilessons' },
+    { net:'li', n:'LinkedIn', fmt:'Carrousel PDF 5 pages', date:'Jeudi 26 novembre 2026, 8 h 30', obj:'Crédibilité : expliquer le modèle des 3 stations', art:'valdisere', ratio:'li',
+      title:'Suivre la neige :<br><em>3 stations, 1 saison</em>',
+      text:'Pourquoi un moniteur qui change de station au fil de l\'hiver ?\n\n• Mi-décembre – début janvier : Courchevel, pour les fêtes.\n• Mi-janvier – fin février : Megève, le cœur de l\'hiver.\n• Fin février – début mai : Val d\'Isère, la haute altitude qui garde la neige au printemps.\n\nRésultat : des conditions au meilleur pour mes clients, et une clientèle internationale qui me retrouve d\'une saison à l\'autre.\n\nHôteliers et agences de chalets : je cherche trois partenaires par station.' },
+    { net:'tt', n:'TikTok', fmt:'Tutoriel 25 s, 9:16', date:'Samedi 28 novembre 2026, 11 h', obj:'Engagement : exercice à faire en famille', art:'courchevel', ratio:'v916', video:true,
+      title:'L\'exercice<br><em>du serveur</em>',
+      text:'L\'exercice du serveur 🍽️ à faire avec vos enfants sur les pistes :\nles bras devant, comme si vous portiez un plateau. Si le plateau penche, vous tombez !\n\nRésultat : les épaules restent face à la pente, les virages deviennent propres.\n\nEssayez et dites-moi en commentaire. #ski #skikids #skitips' },
+    { net:'ig', n:'Instagram', fmt:'Post image, 1:1', date:'Mardi 1er décembre 2026, 18 h', obj:'Conversion : remplir les semaines des fêtes', art:'courchevel', ratio:'',
+      title:'Les fêtes à Courchevel.<br><em>Encore quelques semaines.</em>',
+      text:'Noël et le Nouvel An à Courchevel, en famille, avec votre moniteur toute la semaine. ✨\n\nIl reste quelques semaines disponibles entre le 15 décembre et le 9 janvier.\nSemaine Grand Air : 3 750 € TTC pour toute la famille, jusqu\'à 5 skieurs.\n\nRéservation en trois minutes : lien en bio.' },
+    { net:'li', n:'LinkedIn', fmt:'Post texte + image', date:'Jeudi 3 décembre 2026, 8 h 30', obj:'Conversion : le cadeau de fin d\'année', art:'hero', ratio:'li',
+      title:'Offrir une semaine<br><em>à sa famille</em>',
+      text:'Vous cherchez un cadeau de fin d\'année qui ne finira pas dans un placard ?\n\nUne semaine de ski en famille avec un moniteur privé, à Megève ou Val d\'Isère, en janvier ou au printemps. Écrivez à notre conciergerie : le bon cadeau est envoyé en 24 heures, la famille choisit ses dates ensuite.\n\nLe lien est en commentaire.' },
+    { net:'tt', n:'TikTok', fmt:'Vidéo 20 s, 9:16', date:'Samedi 5 décembre 2026, 11 h', obj:'Considération : montrer le carnet du soir', art:'valdisere', ratio:'v916', video:true,
+      title:'Ce que reçoivent<br><em>les parents le soir</em>',
+      text:'Ce que reçoivent les parents chaque soir après la leçon 📲\n— ce que chacun a appris aujourd\'hui\n— l\'exercice à garder en tête pour demain\n— le programme du lendemain\n— une photo du jour\n\nC\'est le carnet de progression Flex. #ski #skifamille #megeve' }
+  ];
+  document.getElementById('post-grid').innerHTML = POSTS.map((p, i) =>
+    '<article class="post">' +
+      '<div class="visual ' + p.ratio + '"><div class="art">' + flexMountain(p.art) + '</div><div class="ov"><div class="top">' + FLEX_LOGO.replace('#191815','#F5F1E8') + '<span>Flex by Tsiry</span></div>' + (p.video ? '<span class="play" aria-hidden="true">▶</span>' : '') + '<h4>' + p.title + '</h4></div></div>' +
+      '<div class="body"><div class="head"><span class="net ' + p.net + '">' + p.n + '</span><span class="muted" style="font-size:.78rem">Post ' + (i + 1) + ' / 9</span></div>' +
+      '<div class="txt">' + esc(p.text) + '</div>' +
+      '<dl><dt>Format</dt><dd>' + p.fmt + '</dd><dt>Date</dt><dd>' + p.date + '</dd><dt>Objectif</dt><dd>' + p.obj + '</dd><dt>Visuel</dt><dd>' + (p.video ? 'Vidéo tournée sur les pistes ; couverture ci-dessus' : 'Image ci-dessus') + '</dd></dl>' +
+      '<button class="copy" data-i="' + i + '">Copier le texte</button></div></article>').join('');
+  document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+    const t = POSTS[+b.dataset.i].text;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => flexToast('Texte copié')).catch(() => flexToast('Copie impossible dans ce navigateur'));
+  }));
+
+  // Calendrier : 4 semaines × 7 jours
+  const days = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const weeks = [
+    { l:'Semaine 1', d:'16 – 22 nov.', start:16, month:'nov.', ev:{0:[['off','Messages au réseau existant (familles 1 à 3)']],1:[['ig','Post 1 · Reel lancement']],2:[['li','Post 2 · Histoire du fondateur']],3:[['tt','Post 3 · 3 erreurs']],4:[['ig','Stories : coulisses']],5:[['off','Préparation plaquette hôtels']]} },
+    { l:'Semaine 2', d:'23 – 29 nov.', start:23, month:'nov.', ev:{0:[['off','Visites conciergeries Courchevel']],1:[['ig','Post 4 · Carrousel semaine type']],2:[['off','Visites conciergeries Megève']],3:[['li','Post 5 · 3 stations']],4:[['off','Visites Val d\'Isère']],5:[['tt','Post 6 · Exercice du serveur']],6:[['ml','Lettre n° 1 : ouverture']]} },
+    { l:'Semaine 3', d:'30 nov. – 6 déc.', start:30, month:'nov.', ev:{0:[['off','Fin du tarif fondateur'],['off','RDV agences de chalets']],1:[['ig','Post 7 · Les fêtes à Courchevel']],2:[['ig','Début publicité Instagram (300 €)']],3:[['li','Post 8 · Le cadeau']],4:[['off','Contact Ski Club of GB et Carv']],5:[['tt','Post 9 · Le carnet du soir']]} },
+    { l:'Semaine 4', d:'7 – 13 déc.', start:7, month:'déc.', ev:{0:[['ig','Stories : préparation du matériel']],1:[['off','Proposition créateur de contenu']],2:[['ig','Reprise du post 3 en Reel']],3:[['li','Bilan des réservations']],4:[['ml','Lettre n° 2 : Courchevel J-5']],5:[['ig','Stories : arrivée à Courchevel']],6:[['off','Appels de préparation des familles']]} }
+  ];
+  let html = '<div class="h"></div>' + days.map(x => '<div class="h">' + x + '</div>').join('');
+  weeks.forEach(w => {
+    html += '<div class="w">' + w.l + '<small>' + w.d + '</small></div>';
+    for (let i = 0; i < 7; i++) {
+      let n = w.start + i, m = w.month;
+      if (w.start === 30 && n > 30) { n -= 30; m = 'déc.'; }
+      html += '<div><span class="muted" style="font-size:.7rem">' + n + ' ' + m + '</span>' + (w.ev[i] || []).map(e => '<span class="ev ' + e[0] + '">' + e[1] + '</span>').join('') + '</div>';
+    }
+  });
+  document.getElementById('cal').innerHTML = html;
+})();
+</script>
+</body>
+</html>
