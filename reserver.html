@@ -7,7 +7,6 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
   .book{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;padding:60px 24px 100px}
@@ -21,13 +20,16 @@
   .step.on{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   .choice{display:grid;gap:14px}
-  .opt{display:flex;justify-content:space-between;align-items:center;gap:16px;border:1px solid var(--line);background:var(--snow);padding:22px 24px;cursor:pointer;transition:border-color .2s,box-shadow .2s}
-  .opt:hover{border-color:var(--gold-2)}
-  .opt.sel{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
-  .opt h4{font-size:1.45rem;margin:0}
-  .opt p{margin:4px 0 0;font-size:.88rem;color:var(--muted)}
-  .opt .p{font-family:var(--serif);font-size:1.6rem;white-space:nowrap;text-align:right}
-  .opt .p small{display:block;font-family:var(--sans);font-size:.72rem;color:var(--muted)}
+  .choice{gap:0;border-top:1px solid var(--line)}
+  .opt{display:flex;justify-content:space-between;align-items:center;gap:20px;border:0;border-bottom:1px solid var(--line);background:transparent;padding:34px 8px;cursor:pointer;transition:background .35s,color .35s,padding .35s}
+  .opt:hover{background:rgba(166,135,90,.08)}
+  .opt.sel{background:var(--ink);color:var(--ivory);padding-left:28px;padding-right:28px}
+  .opt h4{font-size:clamp(1.15rem,2.2vw,1.55rem);margin:0;display:flex;align-items:center;gap:16px}
+  .opt h4::before{content:"";width:14px;height:14px;border-radius:50%;border:1px solid var(--gold);flex:none;transition:background .3s}
+  .opt.sel h4::before{background:var(--gold-2);border-color:var(--gold-2)}
+  .opt .p{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:300;white-space:nowrap;text-align:right}
+  .opt .p small{margin-left:8px;font-size:.62rem;letter-spacing:.2em;color:var(--muted)}
+  .opt.sel .p small{color:var(--gold-2)}
   .stations{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
   @media (max-width:640px){.stations{grid-template-columns:1fr}}
   .st{position:relative;height:150px;overflow:hidden;cursor:pointer;border:2px solid transparent;color:#fff}
@@ -82,7 +84,6 @@
         <h2 style="font-size:2rem">Quelle formule vous ressemble ?</h2>
         <div class="choice" id="offer-list"></div>
         <label class="check" style="margin-top:22px"><input type="checkbox" id="ext"> <span>Ajouter la prolongation week-end (samedi et dimanche après la semaine) : <strong id="ext-p"></strong> TTC</span></label>
-        <p class="form-note">La prolongation ne s'applique qu'aux formules à la semaine.</p>
       </div>
 
       <!-- 2 -->
@@ -171,8 +172,8 @@
 
   // Formules
   $('offer-list').innerHTML = FLEX_OFFERS.map(o =>
-    '<div class="opt" tabindex="0" role="radio" aria-checked="false" data-id="' + o.id + '"><div><h4>' + o.name + '</h4><p>' + o.sub + ' · ' + o.hours + '</p></div>' +
-    '<div class="p">' + flexEur(o.ttc) + '<small>TTC · ' + flexEur(flexHT(o.ttc)) + ' HT</small></div></div>').join('');
+    '<div class="opt" tabindex="0" role="radio" aria-checked="false" data-id="' + o.id + '"><h4>' + o.name + '</h4>' +
+    '<div class="p">' + flexEur(o.ttc) + '<small>TTC</small></div></div>').join('');
   $('ext-p').textContent = flexEur(FLEX_EXT.ttc);
   function pickOffer(id){
     S.offer = FLEX_OFFERS.find(o => o.id === id);
@@ -232,7 +233,7 @@
     $('s-ex').textContent = S.ext ? 'Oui, ' + flexEur(FLEX_EXT.ttc) : 'Non';
     const t = total();
     $('s-total').textContent = flexEur(t);
-    $('s-ht').textContent = 'TTC · soit ' + flexEur(flexHT(t)) + ' HT (TVA 20 %)';
+    $('s-ht').textContent = 'TTC';
     $('deposit').textContent = flexEur(Math.round(t * 0.3));
     $('balance').textContent = flexEur(t - Math.round(t * 0.3));
     $('prev').style.visibility = S.step === 1 ? 'hidden' : 'visible';

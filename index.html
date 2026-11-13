@@ -8,7 +8,6 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/hero.jpg">
 <link rel="stylesheet" href="assets/site.css">
 <style>
@@ -60,11 +59,11 @@
   .chap{position:absolute;left:0;right:0;bottom:9vh;z-index:6;opacity:0;pointer-events:none;will-change:opacity,transform}
   .chap .in{max-width:var(--max);margin:0 auto;padding:0 24px}
   .chap h1,.chap h2{font-weight:400;margin:0 0 .25em;text-shadow:0 2px 24px rgba(0,0,0,.45)}
-  .chap h1{font-size:clamp(2.6rem,6.4vw,5.6rem);max-width:920px}
+  .chap h1{font-size:clamp(2.1rem,5vw,4.3rem);max-width:900px}
   .chap h1 em{font-style:italic;color:var(--gold-2)}
-  .chap h2{font-size:clamp(3.4rem,11vw,9.5rem);line-height:.95;letter-spacing:-.01em}
+  .chap h2{font-size:clamp(2.6rem,8vw,6.6rem);line-height:1;letter-spacing:-.02em}
   .chap .count{display:block;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:14px;text-shadow:0 1px 14px rgba(0,0,0,.6)}
-  .chap .when{font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,1.9rem);font-style:italic;color:#F0E8D8;margin:0 0 6px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+  .chap .when{font-family:var(--serif);font-size:clamp(1.05rem,1.8vw,1.4rem);font-style:italic;color:#F0E8D8;margin:0 0 6px;text-shadow:0 1px 14px rgba(0,0,0,.55)}
   .chap p.sub{max-width:520px;color:#E4DED2;margin:0;font-size:1.05rem;text-shadow:0 1px 14px rgba(0,0,0,.55)}
   .chap .actions{display:flex;gap:14px;flex-wrap:wrap}
   .chap.on{pointer-events:auto}
@@ -84,11 +83,43 @@
   @keyframes cue{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(.2);transform-origin:bottom}}
   @media (prefers-reduced-motion:reduce){.cue i{animation:none}}
 
-  /* ---------- Après la scène ---------- */
-  .after{background:#14181A;color:var(--ivory);padding:110px 0 120px}
-  .after .lead{color:#C9C4B8}
-  .after .pillar{border-top-color:#2B302F}
-  .after .pillar p{color:#A9A398}
+  /* ---------- Après la scène : éditorial, fond ivoire ---------- */
+  .lx{background:var(--ivory);color:var(--ink)}
+  .lx .label{display:block;font-family:var(--brand);font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold)}
+  .lx .statement{text-align:center;padding:150px 0 130px}
+  .lx .statement h2{font-size:clamp(1.9rem,4.2vw,3.6rem);font-weight:400;max-width:900px;margin:18px auto .5em;line-height:1.04}
+  .lx .statement h2 em{font-style:italic;color:var(--gold)}
+  .lx .statement .lead{margin:0 auto;color:var(--ink-2)}
+  .lx .blk{padding:0 0 150px}
+  .lx .duo{display:grid;grid-template-columns:7fr 5fr;gap:clamp(40px,7vw,120px);align-items:center}
+  .lx .duo.rev{grid-template-columns:5fr 7fr}
+  .lx .duo.rev .ph{order:2}
+  .lx .ph{position:relative;overflow:hidden;aspect-ratio:5/4;background:#e4ddcc}
+  .lx .ph img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.1);will-change:transform}
+  .lx .txt h3{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;margin:20px 0 .4em}
+  .lx .txt p{color:var(--ink-2);max-width:380px;margin:0}
+  .lx .rule{width:44px;height:1px;background:var(--gold);margin:26px 0}
+  .lx .tri-head{text-align:center;margin-bottom:70px}
+  .lx .tri-head h3{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;margin:18px 0 .4em}
+  .lx .tri-head p{color:var(--ink-2);margin:0 auto;max-width:460px}
+  .lx .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,34px)}
+  .lx .tri figure{margin:0}
+  .lx .tri figure:nth-child(2){margin-top:64px}
+  .lx .tri .im{position:relative;overflow:hidden;aspect-ratio:3/4;background:#e4ddcc}
+  .lx .tri img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+  .lx .tri figure:hover img{transform:scale(1.05)}
+  .lx .tri figcaption{padding-top:20px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--line);padding-bottom:16px}
+  .lx .tri figcaption strong{font-family:var(--serif);font-weight:400;font-size:clamp(1.1rem,1.8vw,1.5rem)}
+  .lx .tri figcaption span{font-family:var(--brand);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-align:right}
+  .lx .cta{border-top:1px solid var(--line);text-align:center;padding:130px 0 110px}
+  .lx .cta h2{font-size:clamp(1.8rem,3.8vw,3.2rem);font-weight:400;margin:18px 0 28px}
+  .lx .cta .credit{margin:60px 0 0;font-size:.66rem;letter-spacing:.14em;color:var(--muted)}
+  .lx .cta .credit a{color:var(--gold);text-decoration:none}
+  @media (max-width:860px){
+    .lx .statement{padding:100px 0 90px}.lx .blk{padding-bottom:100px}
+    .lx .duo,.lx .duo.rev{grid-template-columns:1fr;gap:34px}.lx .duo.rev .ph{order:0}
+    .lx .tri{grid-template-columns:1fr;gap:40px}.lx .tri figure:nth-child(2){margin-top:0}
+  }
 </style>
 </head>
 <body data-page="vente">
@@ -159,23 +190,63 @@
     </div>
   </section>
 
-  <section class="after">
-    <div class="wrap">
-      <div class="center reveal" style="margin-bottom:60px">
-        <span class="eyebrow">Flex by Tsiry</span>
-        <h2>L'expérience du luxe alpin<br>à travers le ski.</h2>
+  <div class="lx">
+    <section class="statement">
+      <div class="wrap reveal">
+        <span class="label">Flex by Tsiry</span>
+        <h2>L'expérience du luxe alpin <em>à travers le ski.</em></h2>
         <p class="lead">Des leçons privées uniquement : le programme est construit pour votre famille, et le moniteur vous retrouve de station en station.</p>
       </div>
-      <div class="grid g3">
-        <div class="pillar reveal"><span class="num">I</span><h3>Leçons privées</h3><p>Pas de groupe : votre famille a son moniteur pour elle seule.</p></div>
-        <div class="pillar reveal"><span class="num">II</span><h3>La semaine ou le week-end</h3><p>Des packages de cinq jours minimum, avec une option samedi-dimanche.</p></div>
-        <div class="pillar reveal"><span class="num">III</span><h3>Trois stations</h3><p>Courchevel, Megève puis Val d'Isère, selon la période de votre séjour.</p></div>
+    </section>
+
+    <section class="blk">
+      <div class="wrap duo reveal">
+        <div class="ph"><img src="assets/img/lx-mont-blanc.jpg" alt="Le sommet du Mont Blanc émergeant des nuages" loading="lazy"></div>
+        <div class="txt">
+          <span class="label">I</span>
+          <h3>Leçons privées</h3>
+          <div class="rule"></div>
+          <p>Pas de groupe : votre famille a son moniteur pour elle seule.</p>
+        </div>
       </div>
-      <div class="center reveal" style="margin-top:60px">
-        <a class="btn light" href="reserver.html">Réserver votre semaine</a>
+    </section>
+
+    <section class="blk">
+      <div class="wrap duo rev reveal">
+        <div class="ph"><img src="assets/img/ski-3.jpg" alt="Skieur au pied de montagnes enneigées sous les nuages" loading="lazy"></div>
+        <div class="txt">
+          <span class="label">II</span>
+          <h3>La semaine ou le week-end</h3>
+          <div class="rule"></div>
+          <p>Des packages de cinq jours minimum, avec une option samedi-dimanche.</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="blk">
+      <div class="wrap">
+        <div class="tri-head reveal">
+          <span class="label">III</span>
+          <h3>Trois stations</h3>
+          <p>Courchevel, Megève puis Val d'Isère, selon la période de votre séjour.</p>
+        </div>
+        <div class="tri reveal">
+          <figure><div class="im"><img src="assets/img/st-courchevel.jpg" alt="Courchevel" loading="lazy"></div><figcaption><strong>Courchevel</strong><span>15 déc. – début janv.</span></figcaption></figure>
+          <figure><div class="im"><img src="assets/img/st-megeve.jpg" alt="Megève" loading="lazy"></div><figcaption><strong>Megève</strong><span>Mi-janv. – fin févr.</span></figcaption></figure>
+          <figure><div class="im"><img src="assets/img/st-valdisere.jpg" alt="Val d'Isère" loading="lazy"></div><figcaption><strong>Val d'Isère</strong><span>Fin févr. – début mai</span></figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap reveal">
+        <span class="label">Saison 2026-2027</span>
+        <h2>Votre saison commence ici.</h2>
+        <a class="btn" href="reserver.html">Réserver votre semaine</a>
+        <p class="credit">Photos de ski : <a href="https://www.pexels.com/search/skiing/" target="_blank" rel="noopener">Pexels</a> (licence libre)</p>
+      </div>
+    </section>
+  </div>
 </main>
 
 <script src="assets/site.js"></script>
@@ -296,6 +367,19 @@
   measure(); sizeFx(); cur = progress(); apply(cur); requestAnimationFrame(loop);
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { measure(); sizeFx(); }, 120); });
   addEventListener('load', measure);
+
+  /* Légère profondeur sur les visuels I, II et III au défilement (transform seul) */
+  const vins = [...document.querySelectorAll('.lx .ph img')].filter(v => !v.style.transform);
+  let pt = false;
+  function parallax() {
+    pt = false; const h = innerHeight;
+    vins.forEach(v => {
+      const r = v.parentNode.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > h) return;
+      put(v, 'transform', 'translate3d(0,' + (((r.top + r.height / 2) / h - .5) * -26).toFixed(1) + 'px,0) scale(1.1)');
+    });
+  }
+  if (!reduce) { addEventListener('scroll', () => { if (!pt) { pt = true; requestAnimationFrame(parallax); } }, { passive: true }); parallax(); }
 
   document.getElementById('discover').addEventListener('click', () => {
     scrollTo({ top: storyAbs - NAV + .35 * scrollable, behavior: reduce ? 'auto' : 'smooth' });
