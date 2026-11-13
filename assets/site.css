@@ -243,3 +243,5 @@ body{font-weight:400}
 .lang button{background:none;border:0;padding:6px 2px;cursor:pointer;font:inherit;letter-spacing:inherit;color:var(--muted);border-bottom:1px solid transparent;transition:color .25s,border-color .25s}
 .lang button:hover{color:var(--ink)}
 .lang button.on{color:var(--ink);border-bottom-color:var(--gold)}
+.nav-mobile .grp{font-family:var(--brand);font-size:.54rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);padding:20px 0 4px;border:0}
+.nav-mobile .grp:first-child{padding-top:12px}

@@ -23,7 +23,7 @@
         '<span><span class="brand-name">FLEX</span><span class="brand-by">by Tsiry</span></span></a>' +
       '<ul class="nav-side nav-right">' + right.map(li).join('') + CTA + '</ul>' +
       '<div class="tools"><div class="lang" role="group" aria-label="Langue"><button type="button" data-lang="fr" class="on" aria-pressed="true">FR</button><span aria-hidden="true">/</span><button type="button" data-lang="en" aria-pressed="false">EN</button></div><button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>' +
-      '<ul class="nav-mobile">' + left.concat(right).map(li).join('') + CTA + '</ul>' +
+      '<ul class="nav-mobile"><li class="grp">Espace client</li>' + [['index.html', 'Accueil', 'vente'], ['index.html#formules', 'Formules et tarifs', 'x1'], ['index.html#contact', 'Contact', 'x2']].map(li).join('') + '<li class="grp">Espace entreprise</li>' + [['crm.html', 'CRM', 'crm'], ['strategie.html', 'Stratégie', 'strategie'], ['communication.html', 'Communication', 'communication']].map(li).join('') + CTA + '</ul>' +
     '</div>';
 
   document.body.prepend(nav);

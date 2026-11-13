@@ -5,184 +5,307 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dossier stratégique · Flex by Tsiry</title>
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="assets/site.css">
+<style>
+  .phero{position:relative;overflow:hidden;background:#05070a;color:#fff;padding:110px 0 90px}
+  .phero::before{content:"";position:absolute;inset:0;background:url(assets/img/lx-mont-blanc.jpg) 50% 40% / cover no-repeat;opacity:.5}
+  .phero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,10,.55),rgba(5,7,10,.2) 40%,#14181A 100%)}
+  .phero .wrap{position:relative;z-index:1}
+  .phero .eyebrow{color:var(--gold-2)}
+  .phero h1{font-size:clamp(2rem,4.6vw,3.6rem);color:#fff;margin:0 0 .4em}
+  .phero .lead{color:#D9D3C6;max-width:640px}
+  .toc{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+  .toc a{font-family:var(--brand);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:#fff;padding:11px 16px;border:1px solid rgba(255,255,255,.28);transition:background .3s,color .3s}
+  .toc a:hover{background:#fff;color:var(--ink)}
+  .sec{padding:110px 0;border-bottom:1px solid var(--line)}
+  .sec.dark{background:#14181A;color:var(--ivory);border-color:#2B302F}
+  .sec.ivory{background:var(--ivory)}
+  .label{display:block;font-family:var(--brand);font-size:.66rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  .sec h2{font-size:clamp(1.6rem,3.2vw,2.5rem);margin:0 0 .5em}
+  .sec .intro{max-width:660px;color:var(--ink-2);margin:0 0 56px}
+  .sec.dark .intro{color:#C9C4B8}
+  .src{font-size:.74rem;color:var(--muted);margin:14px 0 0}
+  .src a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(166,135,90,.4)}
+  .dark .src{color:#8f8aa3}
+
+  /* Problème */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px);align-items:start}
+  .big{font-size:clamp(1.7rem,3.4vw,2.8rem);font-weight:300;line-height:1.15;margin:0}
+  .big em{font-style:italic;color:var(--gold)}
+  .costs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+  .costs li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--line);font-size:.95rem;color:var(--ink-2)}
+  .costs li b{font-weight:200;font-size:1.6rem;color:var(--gold);line-height:1}
+
+  /* Personas */
+  .personas{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,44px)}
+  .persona{background:#fff;border:1px solid var(--line);padding:clamp(24px,3.4vw,44px)}
+  .persona .top{display:flex;gap:20px;align-items:center;margin-bottom:26px}
+  .persona .mono{width:68px;height:68px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-weight:300;font-size:1.3rem;color:var(--gold);flex:none}
+  .persona h3{font-size:1.25rem;font-weight:300;margin:0 0 4px}
+  .persona .tag{font-family:var(--brand);font-size:.56rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+  .persona dl{margin:0;border-top:1px solid var(--line)}
+  .persona dl div{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+  .persona dt{font-family:var(--brand);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+  .persona dd{margin:0;color:var(--ink-2)}
+  .budget{margin-top:22px}
+  .budget small{font-family:var(--brand);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:8px}
+  .budget .track{height:6px;background:#EEE9DE;position:relative}
+  .budget .track i{position:absolute;top:0;bottom:0;background:var(--gold)}
+
+  /* Marché */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,34px)}
+  .stat{border-top:1px solid var(--gold);padding-top:20px}
+  .stat .n{font-size:clamp(2.2rem,4.2vw,3.4rem);font-weight:200;line-height:1}
+  .stat .l{margin-top:12px;font-size:.9rem;color:var(--ink-2)}
+  .estimate{background:#fff;border-left:2px solid var(--gold);padding:20px 24px;font-size:.9rem;margin-top:34px;color:var(--ink-2)}
+  .trends{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,34px);margin-top:60px}
+  .trend{border-top:1px solid var(--line);padding-top:18px}
+  .trend b{font-family:var(--brand);font-size:.6rem;letter-spacing:.3em;color:var(--gold);font-weight:500;display:block;margin-bottom:10px}
+  .trend h3{font-size:1.05rem;font-weight:500;margin:0 0 8px}
+  .trend p{margin:0;font-size:.88rem;color:var(--ink-2)}
+  .trend p.src{margin-top:12px}
+
+  /* Concurrence */
+  .chart{margin:0 0 54px}
+  .chart h3,.dark h3.sub{font-family:var(--brand);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:500;margin:0 0 22px}
+  .dark h3.sub{color:#8f8aa3}
+  .bar{display:grid;grid-template-columns:minmax(120px,250px) 1fr 96px;gap:16px;align-items:center;margin:0 0 14px;font-size:.88rem}
+  .bar .t{height:30px;background:#EEE9DE;position:relative;overflow:hidden}
+  .bar .t i{position:absolute;left:0;top:0;bottom:0;width:0;background:#2B302F;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in .bar .t i{width:var(--w)}
+  .bar.us .t i{background:linear-gradient(90deg,#A6875A,#C8AE84)}
+  .bar b{font-weight:500;text-align:right}
+  .bar.us span:first-child{font-weight:600}
+  .dark .bar .t{background:#232a2d}
+  .dark .bar .t i{background:var(--gold-2)}
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);background:#fff}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:760px}
+  th,td{text-align:left;padding:16px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--brand);font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--paper)}
+  tr.us td{background:#F8F2E6}
+  td .src{margin:0}
+  .dark table{color:var(--ivory);min-width:0}
+  .dark th{background:#1C2123;color:#8f8aa3}
+  .dark td,.dark th{border-color:#2B302F}
+  .dark .table-wrap{background:transparent;border-color:#2B302F}
+
+  /* Prix & modèle */
+  .pcols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,34px)}
+  .pcol{border-top:1px solid var(--gold);padding-top:20px}
+  .pcol b{font-family:var(--brand);font-size:.6rem;letter-spacing:.3em;color:var(--gold);font-weight:500;display:block;margin-bottom:10px}
+  .pcol h3{font-size:1.1rem;font-weight:500;margin:0 0 8px}
+  .pcol p{margin:0;font-size:.9rem;color:var(--ink-2)}
+  .goal{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.4vw,34px);margin:0 0 54px}
+  .goal > div{border-top:1px solid var(--gold-2);padding-top:18px}
+  .goal .n{font-size:clamp(2rem,3.8vw,3rem);font-weight:200;line-height:1}
+  .goal .l{margin-top:10px;font-size:.88rem;color:#C9C4B8}
+  .stack{display:flex;height:34px;margin:0 0 14px;background:#222}
+  .stack i{display:block;width:0;transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in .stack i{width:var(--w)}
+  .keys{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:.78rem;color:#C9C4B8;margin:0}
+  .keys span{display:inline-flex;align-items:center;gap:8px}
+  .keys i{width:10px;height:10px;display:inline-block}
+  .calc{background:#1C2123;border-left:2px solid var(--gold-2);padding:20px 24px;font-size:.88rem;color:#D8D3C8;margin-top:54px}
+
+  /* Sources */
+  .srcs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+  .srcs li{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;padding:16px 0;border-bottom:1px solid var(--line);font-size:.86rem}
+  .srcs a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold);justify-self:start}
+  .srcs span{color:var(--ink-2)}
+
+  @media (max-width:980px){
+    .two,.personas,.pcols,.trends,.stats,.goal{grid-template-columns:1fr}
+    .srcs li{grid-template-columns:1fr;gap:4px}
+  }
+  @media (max-width:640px){
+    .sec{padding:80px 0}
+    .bar{grid-template-columns:1fr 70px;gap:6px 12px}.bar .t{grid-column:1 / -1;order:3}
+    .persona dl div{grid-template-columns:1fr;gap:2px}
+  }
+</style>
 </head>
 <body data-page="strategie">
 
-<header class="page-head">
+<header class="phero">
   <div class="wrap">
-    <span class="eyebrow">Espace entreprise · Dossier stratégique</span>
-    <h1 style="font-size:clamp(2.4rem,5vw,4rem)">Pourquoi Flex a sa place</h1>
+    <span class="eyebrow">Espace entreprise · Stratégie</span>
+    <h1>Pourquoi Flex a sa place</h1>
     <p class="lead">Le problème, les clients, le marché, la concurrence, le prix et le modèle économique. Chaque chiffre de marché renvoie à sa source ; les autres sont des estimations, avec leur calcul.</p>
     <nav class="toc" aria-label="Sommaire">
-      <a href="#probleme">Problème</a><a href="#personas">Personas</a><a href="#marche">Marché</a><a href="#concurrence">Concurrence</a><a href="#prix">Prix</a><a href="#modele">Modèle économique</a>
+      <a href="#probleme">Problème</a><a href="#personas">Personas</a><a href="#marche">Marché</a><a href="#concurrence">Concurrence</a><a href="#prix">Prix</a><a href="#modele">Modèle économique</a><a href="#sources">Sources</a>
     </nav>
   </div>
 </header>
 
-<main class="doc">
-  <!-- PROBLÈME -->
-  <section id="probleme">
-    <div class="wrap split" style="align-items:start">
-      <div>
-        <span class="eyebrow">01 · Le problème</span>
-        <h2>Une famille, des niveaux différents, une semaine pour progresser</h2>
+<main>
+  <!-- 01 PROBLÈME -->
+  <section class="sec" id="probleme">
+    <div class="wrap two">
+      <div class="reveal">
+        <span class="label">01 · Le problème</span>
+        <p class="big">Une famille, des niveaux différents, <em>une semaine pour progresser.</em></p>
+        <p class="src" style="margin-top:28px;font-size:.9rem">Les familles aisées, souvent étrangères, qui passent une semaine dans une station haut de gamme avec des enfants et des adultes de niveaux différents. Le problème revient chaque matin du séjour, une à deux fois par saison.</p>
       </div>
-      <div>
-        <p><strong>Qui le vit :</strong> les familles aisées, souvent étrangères, qui passent une semaine dans une station haut de gamme avec des enfants et des adultes de niveaux différents.</p>
-        <p><strong>À quelle fréquence :</strong> à chaque séjour, une à deux fois par saison. Le problème revient chaque matin de la semaine.</p>
-        <p><strong>Ce que ça coûte aujourd'hui :</strong></p>
-        <ul>
-          <li>En cours collectif, la famille est séparée par niveau et ne skie pas ensemble ; le moniteur change souvent d'une semaine à l'autre.</li>
-          <li>En cours privé réservé au jour le jour, le moniteur peut changer chaque jour : il faut tout réexpliquer, et la progression repart de zéro.</li>
-          <li>Une journée de cours privé coûte déjà de 600 à 990 € TTC dans ces stations (voir la concurrence), sans garantie de continuité ni d'organisation.</li>
-          <li>L'organisation (forfaits, matériel, rendez-vous, déjeuner) prend du temps sur les vacances.</li>
-        </ul>
-      </div>
+      <ul class="costs reveal">
+        <li><b>01</b><span>En cours collectif, la famille est séparée par niveau et ne skie pas ensemble ; le moniteur change souvent d'une semaine à l'autre.</span></li>
+        <li><b>02</b><span>En cours privé réservé au jour le jour, le moniteur peut changer chaque jour : il faut tout réexpliquer, et la progression repart de zéro.</span></li>
+        <li><b>03</b><span>Une journée de cours privé coûte déjà de 600 à 990 € TTC dans ces stations (voir la concurrence), sans garantie de continuité.</span></li>
+        <li><b>04</b><span>L'organisation d'un séjour (forfaits, matériel, rendez-vous) prend du temps sur les vacances.</span></li>
+      </ul>
     </div>
   </section>
 
-  <!-- PERSONAS -->
-  <section id="personas" class="section-ivory">
+  <!-- 02 PERSONAS -->
+  <section class="sec ivory" id="personas">
     <div class="wrap">
-      <span class="eyebrow">02 · La cible</span>
+      <span class="label">02 · La cible</span>
       <h2>Deux familles types</h2>
-      <p class="muted" style="margin-bottom:36px">Personas construits pour la démo, à partir de la clientèle observée en station. Les personnes sont fictives.</p>
-      <div class="grid g2">
-        <article class="card">
-          <span class="tag">Persona 1 · Semaine Grand Air</span>
-          <h3 style="margin-top:14px">Charlotte Whitfield, 42 ans</h3>
-          <dl class="kv">
-            <dt>Métier</dt><dd>Associée dans un cabinet de conseil, Londres</dd>
-            <dt>Famille</dt><dd>Mariée, trois enfants de 6, 9 et 12 ans</dd>
-            <dt>Séjour</dt><dd>Une semaine à Courchevel pendant les fêtes, en chalet avec services</dd>
-            <dt>Budget cours</dt><dd>3 500 à 5 500 € pour la semaine</dd>
-            <dt>Ce qu'elle veut</dt><dd>Que toute la famille skie ensemble avant la fin de la semaine, sans rien organiser</dd>
-            <dt>Ce qui la freine</dt><dd>La peur que le plus jeune ralentisse les autres ; les moniteurs qui changent</dd>
-            <dt>Où elle s'informe</dt><dd>Instagram, recommandations d'amis, conciergerie du chalet, presse voyage haut de gamme</dd>
+      <p class="intro">Personas construits pour la démo à partir de la clientèle visée. Les personnes sont fictives.</p>
+      <div class="personas">
+        <article class="persona reveal">
+          <div class="top"><div class="mono">CW</div><div><span class="tag">Persona 1 · Semaine Grand Air</span><h3>Charlotte Whitfield, 42 ans</h3></div></div>
+          <dl>
+            <div><dt>Métier</dt><dd>Associée dans un cabinet de conseil, Londres</dd></div>
+            <div><dt>Famille</dt><dd>Mariée, trois enfants de 6, 9 et 12 ans</dd></div>
+            <div><dt>Séjour</dt><dd>Une semaine à Courchevel pendant les fêtes, en chalet</dd></div>
+            <div><dt>Ce qu'elle veut</dt><dd>Que toute la famille skie ensemble avant la fin de la semaine</dd></div>
+            <div><dt>Ce qui la freine</dt><dd>La peur que le plus jeune ralentisse les autres ; les moniteurs qui changent</dd></div>
+            <div><dt>Où elle s'informe</dt><dd>Instagram, recommandations d'amis, presse voyage haut de gamme</dd></div>
           </dl>
+          <div class="budget"><small><span>Budget cours</span><span>3 500 à 5 500 €</span></small><div class="track"><i style="left:35%;right:30%"></i></div></div>
         </article>
-        <article class="card">
-          <span class="tag">Persona 2 · Semaine Matinées</span>
-          <h3 style="margin-top:14px">Pieter Van den Berg, 38 ans</h3>
-          <dl class="kv">
-            <dt>Métier</dt><dd>Fondateur d'une société de logiciels, Amsterdam</dd>
-            <dt>Famille</dt><dd>En couple, deux enfants de 4 et 6 ans qui n'ont jamais skié</dd>
-            <dt>Séjour</dt><dd>Une semaine à Megève en février, à l'hôtel</dd>
-            <dt>Budget cours</dt><dd>2 000 à 3 000 € pour la semaine</dd>
-            <dt>Ce qu'il veut</dt><dd>Que les enfants aiment le ski dès la première semaine ; garder les après-midi en famille</dd>
-            <dt>Ce qui le freine</dt><dd>Les cours collectifs de 8 à 10 enfants ; la barrière de la langue</dd>
-            <dt>Où il s'informe</dt><dd>Google, Instagram, LinkedIn, avis de parents, réception de l'hôtel</dd>
+        <article class="persona reveal">
+          <div class="top"><div class="mono">PV</div><div><span class="tag">Persona 2 · Semaine Matinées</span><h3>Pieter Van den Berg, 38 ans</h3></div></div>
+          <dl>
+            <div><dt>Métier</dt><dd>Fondateur d'une société de logiciels, Amsterdam</dd></div>
+            <div><dt>Famille</dt><dd>En couple, deux enfants de 4 et 6 ans qui n'ont jamais skié</dd></div>
+            <div><dt>Séjour</dt><dd>Une semaine à Megève en février, à l'hôtel</dd></div>
+            <div><dt>Ce qu'il veut</dt><dd>Que les enfants aiment le ski dès la première semaine, et garder les après-midi en famille</dd></div>
+            <div><dt>Ce qui le freine</dt><dd>Les cours collectifs de nombreux enfants ; la barrière de la langue</dd></div>
+            <div><dt>Où il s'informe</dt><dd>Google, Instagram, LinkedIn, avis de parents, réception de l'hôtel</dd></div>
           </dl>
+          <div class="budget"><small><span>Budget cours</span><span>2 000 à 3 000 €</span></small><div class="track"><i style="left:20%;right:50%"></i></div></div>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- MARCHÉ -->
-  <section id="marche">
+  <!-- 03 MARCHÉ -->
+  <section class="sec" id="marche">
     <div class="wrap">
-      <span class="eyebrow">03 · Le marché</span>
+      <span class="label">03 · Le marché</span>
       <h2>Un marché solide, de plus en plus international</h2>
-      <div class="grid g3" style="margin-top:40px">
-        <div class="stat">
-          <div class="n">54,8 M</div>
-          <div class="l">journées-skieurs en France sur la saison 2024-2025, en hausse de 5,5 % sur un an. La France est le 2ᵉ marché mondial.</div>
-          <p class="src">Source : Domaines Skiables de France, via <a href="https://www.lechotouristique.com/article/hiver-2024-2025-la-france-tutoie-les-55-millions-de-journees-skieurs" target="_blank" rel="noopener">L'Écho Touristique</a></p>
-        </div>
-        <div class="stat">
-          <div class="n">+4,9 %</div>
-          <div class="l">de journées-skieurs au-dessus de la moyenne des trois derniers hivers, avec le retour des clientèles étrangères et des congés britanniques et flamands décalés en avril.</div>
-          <p class="src">Source : <a href="https://www.iloveski.org/fr/2025/10/03/bilan-2024-2025/" target="_blank" rel="noopener">I Love Ski, bilan 2024-2025 (DSF)</a></p>
-        </div>
-        <div class="stat">
-          <div class="n">16 000</div>
-          <div class="l">moniteurs à l'ESF, soit environ 80 % de la profession, présents dans 216 stations.</div>
-          <p class="src">Source : <a href="https://www.autoritedelaconcurrence.fr/sites/default/files/2026-03/Diapo_ESF_ADLCweb_FR.pdf" target="_blank" rel="noopener">Autorité de la concurrence, mars 2026</a></p>
-        </div>
+      <p class="intro">Chaque chiffre ci-dessous a été vérifié à la source le 13 novembre 2026.</p>
+      <div class="stats reveal">
+        <div class="stat"><div class="n">54,8 M</div><div class="l">journées-skieurs en France sur la saison 2024-2025, soit +5,5 % sur un an. La France est le deuxième marché mondial.</div><p class="src">Source : Domaines Skiables de France, via <a href="https://www.lechotouristique.com/article/hiver-2024-2025-la-france-tutoie-les-55-millions-de-journees-skieurs" target="_blank" rel="noopener">L'Écho Touristique</a></p></div>
+        <div class="stat"><div class="n">+4,9 %</div><div class="l">de journées-skieurs au-dessus de la moyenne des trois derniers hivers, avec le retour des clientèles étrangères et des congés britanniques et flamands décalés en avril.</div><p class="src">Source : <a href="https://www.iloveski.org/fr/2025/10/03/bilan-2024-2025/" target="_blank" rel="noopener">I Love Ski, bilan 2024-2025 (DSF)</a></p></div>
+        <div class="stat"><div class="n">16 000</div><div class="l">moniteurs à l'ESF, soit plus de 80 % de la profession, présents dans 216 stations.</div><p class="src">Source : <a href="https://www.autoritedelaconcurrence.fr/sites/default/files/2026-03/Diapo_ESF_ADLCweb_FR.pdf" target="_blank" rel="noopener">Autorité de la concurrence, mars 2026</a></p></div>
       </div>
-
-      <div class="estimate">
-        <strong>Estimation, nombre total de moniteurs :</strong> si 16 000 moniteurs représentent 80 % de la profession, la France compte environ 16 000 ÷ 0,8 = <strong>20 000 moniteurs</strong>. Le marché de l'enseignement est donc très concentré autour d'une école, ce qui laisse de la place aux indépendants positionnés sur un service différent.
-      </div>
-
-      <h3 style="margin-top:56px">Trois tendances qui portent Flex</h3>
-      <div class="grid g3" style="margin-top:20px">
-        <div class="pillar"><span class="num">I</span><h3 style="font-size:1.3rem">La montagne de luxe</h3><p class="muted">Les grandes maisons du luxe s'installent dans les stations et en font un terrain d'image. La clientèle de ces stations attend un service à ce niveau. <span class="src"><a href="https://www.luxurytribune.com/en/from-the-slopes-to-the-podium-how-luxury-is-shaping-the-image-of-skiing" target="_blank" rel="noopener">Luxury Tribune</a></span></p></div>
-        <div class="pillar"><span class="num">II</span><h3 style="font-size:1.3rem">La clientèle étrangère</h3><p class="muted">Les clientèles étrangères sont de retour, et le décalage des congés britanniques et flamands en avril a profité aux stations : c'est la fin de saison de Val d'Isère dans notre calendrier. <span class="src"><a href="https://www.iloveski.org/fr/2025/10/03/bilan-2024-2025/" target="_blank" rel="noopener">I Love Ski</a></span></p></div>
-        <div class="pillar"><span class="num">III</span><h3 style="font-size:1.3rem">L'ouverture de l'ESF</h3><p class="muted">L'Autorité de la concurrence a sanctionné l'exclusivité imposée aux moniteurs ESF : le marché s'ouvre aux moniteurs indépendants. <span class="src"><a href="https://www.autoritedelaconcurrence.fr/sites/default/files/2026-03/Diapo_ESF_ADLCweb_FR.pdf" target="_blank" rel="noopener">Autorité de la concurrence</a></span></p></div>
+      <div class="estimate reveal"><strong>Estimation, nombre total de moniteurs :</strong> si 16 000 moniteurs représentent 80 % de la profession, la France compte environ 16 000 ÷ 0,8 = <strong>20 000 moniteurs</strong>. Le marché de l'enseignement est très concentré autour d'une école, ce qui laisse de la place aux moniteurs indépendants positionnés sur un service différent.</div>
+      <div class="trends reveal">
+        <div class="trend"><b>I</b><h3>La montagne de luxe</h3><p>Les grandes maisons du luxe investissent les stations et en font un terrain d'image : la clientèle de ces stations attend un service à ce niveau.</p><p class="src"><a href="https://www.luxurytribune.com/en/from-the-slopes-to-the-podium-how-luxury-is-shaping-the-image-of-skiing" target="_blank" rel="noopener">Luxury Tribune</a></p></div>
+        <div class="trend"><b>II</b><h3>La clientèle étrangère</h3><p>Elle est de retour, et le décalage des congés britanniques et flamands en avril a profité aux stations : c'est la fin de saison de Val d'Isère dans notre calendrier.</p><p class="src"><a href="https://www.iloveski.org/fr/2025/10/03/bilan-2024-2025/" target="_blank" rel="noopener">I Love Ski</a></p></div>
+        <div class="trend"><b>III</b><h3>L'ouverture de l'ESF</h3><p>L'Autorité de la concurrence a sanctionné l'exclusivité imposée aux moniteurs de l'ESF : le marché s'ouvre aux moniteurs indépendants.</p><p class="src"><a href="https://www.autoritedelaconcurrence.fr/sites/default/files/2026-03/Diapo_ESF_ADLCweb_FR.pdf" target="_blank" rel="noopener">Autorité de la concurrence</a></p></div>
       </div>
     </div>
   </section>
 
-  <!-- CONCURRENCE -->
-  <section id="concurrence" class="section-ivory">
+  <!-- 04 CONCURRENCE -->
+  <section class="sec ivory" id="concurrence">
     <div class="wrap">
-      <span class="eyebrow">04 · La concurrence</span>
-      <h2>Ce que coûte un cours privé dans nos trois stations</h2>
-      <p class="muted">Tarifs publics relevés le 13 novembre 2026 sur les pages citées. « Équivalent semaine » = 5 journées au tarif journée, pour comparer avec nos formules.</p>
-      <div class="table-wrap" style="margin-top:28px">
+      <span class="label">04 · La concurrence</span>
+      <h2>Ce que coûte un cours privé dans nos stations</h2>
+      <p class="intro">Tarifs publics relevés le 13 novembre 2026 sur les pages citées, en euros TTC. « Équivalent semaine » = cinq journées au tarif journée, pour comparer avec nos formules.</p>
+      <div class="chart reveal">
+        <h3>Prix d'une journée de cours privé</h3>
+        <div class="bar"><span>ESF Megève</span><div class="t"><i style="--w:60.6%"></i></div><b>600 €</b></div>
+        <div class="bar"><span>ESF Courchevel 1650</span><div class="t"><i style="--w:74.5%"></i></div><b>738 €</b></div>
+        <div class="bar us"><span>Flex · Semaine Grand Air</span><div class="t"><i style="--w:75.8%"></i></div><b>750 €</b></div>
+        <div class="bar"><span>Elite Ski Experience</span><div class="t"><i style="--w:100%"></i></div><b>990 €</b></div>
+      </div>
+      <div class="table-wrap reveal">
         <table>
-          <thead><tr><th>Concurrent</th><th>Station</th><th>Prix journée privée</th><th>Équivalent semaine</th><th>Ce qui nous distingue</th><th>Source</th></tr></thead>
+          <thead><tr><th>Concurrent</th><th>Station</th><th>Prix de la journée</th><th>Équivalent semaine</th><th>Ce qui nous distingue</th><th>Source</th></tr></thead>
           <tbody>
-            <tr><td><strong>ESF Megève</strong></td><td>Megève</td><td>600 € (matin 360 €, après-midi 280 €), saison 2026-2027</td><td>3 000 €</td><td>Tarif à la journée ; Flex propose des packages à la semaine pour la même famille.</td><td class="src"><a href="https://hautesavoiemontblanc-tourisme.com/offres/formule-journee-demi-journee-en-cours-prive-avec-lesf-megeve-fr-5835813/" target="_blank" rel="noopener">Office de tourisme</a></td></tr>
-            <tr><td><strong>ESF Courchevel 1650</strong></td><td>Courchevel</td><td>738 € la journée (9 h 30 – 16 h 45), haute saison</td><td>3 690 €</td><td>Tarif à la journée ; Flex propose des packages à la semaine, avec un prix par famille.</td><td class="src"><a href="https://ski-pro.com/en/ski-lessons/france/savoie/courchevel-1650-moriond/esf-courchevel-1650/private-ski-lesson-1051" target="_blank" rel="noopener">Ski-Pro</a></td></tr>
-            <tr><td><strong>Elite Ski Experience</strong></td><td>Courchevel</td><td>990 € en haute saison (9 h – 16 h 30)</td><td>4 950 €</td><td>Positionnement très haut de gamme ; Flex offre la même continuité pour 24 % de moins.</td><td class="src"><a href="https://ski-pro.com/en/ski-lessons/france/savoie/courchevel-1850/elite-ski-experience-2/private-ski-lesson-1050" target="_blank" rel="noopener">Ski-Pro</a></td></tr>
-            <tr class="us"><td><strong>Flex by Tsiry</strong></td><td>Les trois, selon la période</td><td>750 € (Grand Air) · 450 € la matinée de 3 h 30 (Matinées) · 780 € (Week-end)</td><td>3 750 €</td><td>Le même moniteur toute la semaine, un prix par famille jusqu'à 5 skieurs.</td><td class="src">Nos tarifs</td></tr>
+            <tr><td><strong>ESF Megève</strong></td><td>Megève</td><td>600 € (matin 360 €, après-midi 280 €), saison 2026-2027</td><td>3 000 €</td><td>Tarif à la journée ; Flex propose des packages à la semaine pour la même famille.</td><td><p class="src"><a href="https://hautesavoiemontblanc-tourisme.com/offres/formule-journee-demi-journee-en-cours-prive-avec-lesf-megeve-fr-5835813/" target="_blank" rel="noopener">Office de tourisme</a></p></td></tr>
+            <tr><td><strong>ESF Courchevel 1650</strong></td><td>Courchevel</td><td>738 € la journée (9 h 30 – 16 h 45), haute saison</td><td>3 690 €</td><td>Tarif à la journée ; Flex propose des packages à la semaine, avec un prix par famille.</td><td><p class="src"><a href="https://ski-pro.com/en/ski-lessons/france/savoie/courchevel-1650-moriond/esf-courchevel-1650/private-ski-lesson-1051" target="_blank" rel="noopener">Ski-Pro</a></p></td></tr>
+            <tr><td><strong>Elite Ski Experience</strong></td><td>Courchevel</td><td>990 € en haute saison (9 h – 16 h 30)</td><td>4 950 €</td><td>Positionnement très haut de gamme ; Flex offre la même continuité pour 24 % de moins.</td><td><p class="src"><a href="https://ski-pro.com/en/ski-lessons/france/savoie/courchevel-1850/elite-ski-experience-2/private-ski-lesson-1050" target="_blank" rel="noopener">Ski-Pro</a></p></td></tr>
+            <tr class="us"><td><strong>Flex by Tsiry</strong></td><td>Les trois, selon la période</td><td>750 € (Grand Air) · 450 € la matinée de 3 h 30 (Matinées) · 780 € (Week-end)</td><td>3 750 €</td><td>Le même moniteur toute la semaine, un prix par famille jusqu'à 5 skieurs.</td><td><p class="src">Nos tarifs</p></td></tr>
           </tbody>
         </table>
       </div>
-      <p class="src" style="margin-top:12px">Les tarifs des concurrents sont TTC tels qu'affichés publiquement. Ils peuvent varier selon la date ; ils sont donnés comme repères.</p>
     </div>
   </section>
 
-  <!-- PRIX -->
-  <section id="prix">
-    <div class="wrap split" style="align-items:start">
-      <div>
-        <span class="eyebrow">05 · Le prix</span>
-        <h2>750 € la journée : au-dessus des écoles, sous l'ultra-luxe</h2>
-        <p class="lead">Le prix a été fixé à partir de trois repères.</p>
-      </div>
-      <div>
-        <div class="pillar"><span class="num">I</span><h3 style="font-size:1.3rem">Les concurrents</h3><p class="muted">Les écoles ESF affichent 600 à 738 € la journée, le très haut de gamme 990 €. À 750 €, Flex se place 2 à 25 % au-dessus des écoles et 24 % sous l'offre la plus chère.</p></div>
-        <div class="pillar"><span class="num">II</span><h3 style="font-size:1.3rem">La valeur pour le client</h3><p class="muted">Pour une famille de cinq, la Semaine Grand Air revient à 150 € par personne et par jour, pour un moniteur dédié. Elle évite aussi de payer cinq jours de cours avec cinq moniteurs différents.</p></div>
-        <div class="pillar"><span class="num">III</span><h3 style="font-size:1.3rem">Les coûts</h3><p class="muted">Le prix couvre le temps passé hors piste (préparation du programme de chaque skieur, échanges avec la famille) : environ 1 h 30 par jour, d'après notre estimation.</p></div>
-        <div class="estimate"><strong>Matinées et Week-end :</strong> la matinée de 3 h 30 revient à 450 €, contre 360 € le matin à l'ESF Megève, soit 25 % de plus. L'écart paie la continuité d'un même moniteur, car le temps de préparation est le même qu'une journée. Le Week-end (780 € par jour) est légèrement plus cher car il bloque les deux jours les plus demandés.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MODÈLE -->
-  <section id="modele" class="section-dark">
+  <!-- 05 PRIX -->
+  <section class="sec" id="prix">
     <div class="wrap">
-      <span class="eyebrow">06 · Le modèle économique</span>
-      <h2>Objectif : 60 000 € HT sur la saison 2026-2027</h2>
-      <p class="lead">Flex vend du temps de moniteur à la semaine, payé d'avance (30 % d'acompte, solde à 30 jours). La saison couvre environ 20 semaines, du 15 décembre au 1er mai. Toutes les valeurs ci-dessous sont des estimations.</p>
+      <span class="label">05 · Le prix</span>
+      <h2>750 € la journée : au-dessus des écoles, sous le haut de gamme</h2>
+      <p class="intro">Le prix a été fixé à partir de trois repères.</p>
+      <div class="pcols reveal">
+        <div class="pcol"><b>I</b><h3>Les concurrents</h3><p>Les écoles ESF affichent 600 à 738 € la journée, le très haut de gamme 990 €. À 750 €, Flex se place 2 à 25 % au-dessus des écoles et 24 % sous l'offre la plus chère.</p></div>
+        <div class="pcol"><b>II</b><h3>La valeur pour le client</h3><p>Pour une famille de cinq, la Semaine Grand Air revient à 150 € par personne et par jour, avec un moniteur qui connaît chaque skieur du lundi au vendredi.</p></div>
+        <div class="pcol"><b>III</b><h3>Les coûts</h3><p>Le prix couvre le temps passé hors piste (préparation du programme de chaque skieur, échanges avec la famille) : environ 1 h 30 par jour, d'après notre estimation.</p></div>
+      </div>
+      <div class="estimate reveal"><strong>Matinées et Week-end :</strong> la matinée de 3 h 30 revient à 450 €, contre 360 € le matin à l'ESF Megève, soit 25 % de plus. L'écart paie la continuité d'un même moniteur, car le temps de préparation est le même qu'une journée. Le Week-end (780 € par jour) est légèrement plus cher car il bloque les deux jours les plus demandés.</div>
+    </div>
+  </section>
 
-      <div class="table-wrap" style="margin-top:32px;background:transparent;border-color:#2B302F">
-        <table style="color:var(--ivory)">
-          <thead><tr><th style="background:#1C2123;color:#A9A398">Formule</th><th style="background:#1C2123;color:#A9A398">Prix HT</th><th style="background:#1C2123;color:#A9A398">Ventes visées</th><th style="background:#1C2123;color:#A9A398">Chiffre d'affaires HT</th></tr></thead>
+  <!-- 06 MODÈLE -->
+  <section class="sec dark" id="modele">
+    <div class="wrap">
+      <span class="label">06 · Le modèle économique</span>
+      <h2>Objectif : 60 250 € HT sur la saison 2026-2027</h2>
+      <p class="intro">Flex vend du temps de moniteur à la semaine, payé d'avance (30 % d'acompte, solde à 30 jours). La saison couvre environ 20 semaines, du 15 décembre au début mai. Toutes les valeurs ci-dessous sont des estimations.</p>
+      <div class="goal reveal">
+        <div><div class="n">60 250 €</div><div class="l">de chiffre d'affaires visé, hors taxes, avec 29 ventes.</div></div>
+        <div><div class="n">28 755 €</div><div class="l">de charges estimées, dont 13 255 € de cotisations sociales.</div></div>
+        <div><div class="n">31 495 €</div><div class="l">de résultat avant impôt estimé. Le point mort est atteint à la 10ᵉ vente.</div></div>
+      </div>
+      <div class="reveal">
+        <h3 class="sub">Chiffre d'affaires visé, par formule</h3>
+        <div class="bar"><span>La Semaine Grand Air · 10 ventes</span><div class="t"><i style="--w:100%"></i></div><b>31 250 €</b></div>
+        <div class="bar"><span>La Semaine Matinées · 8 ventes</span><div class="t"><i style="--w:48%"></i></div><b>15 000 €</b></div>
+        <div class="bar"><span>Le Week-end · 8 ventes</span><div class="t"><i style="--w:33.3%"></i></div><b>10 400 €</b></div>
+        <div class="bar"><span>Prolongation week-end · 3 ventes</span><div class="t"><i style="--w:11.5%"></i></div><b>3 600 €</b></div>
+      </div>
+      <div class="table-wrap reveal" style="margin:34px 0 54px">
+        <table>
+          <thead><tr><th>Formule</th><th>Prix HT</th><th>Ventes visées</th><th>Chiffre d'affaires HT</th></tr></thead>
           <tbody>
             <tr><td>La Semaine Grand Air</td><td>3 125 €</td><td>10</td><td>31 250 €</td></tr>
             <tr><td>La Semaine Matinées</td><td>1 875 €</td><td>8</td><td>15 000 €</td></tr>
             <tr><td>Le Week-end</td><td>1 300 €</td><td>8</td><td>10 400 €</td></tr>
             <tr><td>Prolongation week-end</td><td>1 200 €</td><td>3</td><td>3 600 €</td></tr>
-            <tr><td><strong>Total</strong></td><td></td><td><strong>29 ventes</strong></td><td><strong>60 250 € HT</strong></td></tr>
+            <tr><td><strong>Total</strong></td><td></td><td><strong>29 ventes</strong></td><td><strong>60 250 €</strong></td></tr>
           </tbody>
         </table>
       </div>
+      <div class="reveal">
+        <h3 class="sub">Où vont les 28 755 € de charges</h3>
+        <div class="stack"><i style="--w:46.1%;background:#C8AE84"></i><i style="--w:31.3%;background:#8f8aa3"></i><i style="--w:10.4%;background:#ff9db0"></i><i style="--w:7%;background:#8fb08f"></i><i style="--w:5.2%;background:#8dc3ee"></i></div>
+        <div class="keys"><span><i style="background:#C8AE84"></i>Cotisations sociales, 22 % du CA · 13 255 €</span><span><i style="background:#8f8aa3"></i>Logement saisonnier · 9 000 €</span><span><i style="background:#ff9db0"></i>Communication · 3 000 €</span><span><i style="background:#8fb08f"></i>Matériel vidéo et outils · 2 000 €</span><span><i style="background:#8dc3ee"></i>Assurance et carte professionnelle · 1 500 €</span></div>
+      </div>
+      <div class="calc reveal"><strong>Calcul du point mort :</strong> charges fixes de 15 500 € (logement, assurance, communication, matériel) ÷ marge par vente (panier moyen de 2 078 € HT × 78 % après cotisations ≈ 1 620 €) ≈ 9,6, soit <strong>10 ventes</strong>. Au-delà, chaque vente supplémentaire rapporte environ 1 620 €. L'objectif tient dans la capacité d'un seul moniteur : 18 semaines occupées sur 20.</div>
+    </div>
+  </section>
 
-      <div class="grid g3" style="margin-top:40px">
-        <div class="stat" style="border-color:var(--gold-2)"><div class="n">18 / 20</div><div class="l" style="color:#C9C4B8">semaines occupées en semaine. L'objectif tient dans la capacité d'un seul moniteur.</div></div>
-        <div class="stat" style="border-color:var(--gold-2)"><div class="n">≈ 29 000 €</div><div class="l" style="color:#C9C4B8">de charges estimées : logement saisonnier (9 000 €), assurance et carte professionnelle (1 500 €), communication (3 000 €), matériel vidéo et outils (2 000 €), cotisations sociales (hypothèse 22 % du CA, 13 300 €).</div></div>
-        <div class="stat" style="border-color:var(--gold-2)"><div class="n">≈ 31 500 €</div><div class="l" style="color:#C9C4B8">de résultat avant impôt : 60 250 € − 28 755 €. Le point mort est atteint vers la 10ᵉ vente.</div></div>
-      </div>
-      <div class="estimate" style="background:#1C2123;color:#D8D3C8">
-        <strong>Calcul du point mort :</strong> charges fixes de 15 500 € ÷ (marge par vente moyenne : 2 078 € HT de panier moyen × 78 % après cotisations ≈ 1 620 €) ≈ 9,6, soit <strong>10 ventes</strong>. Au-delà, chaque vente supplémentaire rapporte environ 1 620 €.
-      </div>
+  <!-- SOURCES -->
+  <section class="sec" id="sources">
+    <div class="wrap">
+      <span class="label">Sources et méthode</span>
+      <h2>D'où viennent les chiffres</h2>
+      <p class="intro">Liens ouverts et chiffres retrouvés sur chaque page le 13 novembre 2026, sauf le PDF de l'Autorité de la concurrence, à ouvrir directement. Les estimations (nombre de moniteurs, modèle économique) sont accompagnées de leur calcul.</p>
+      <ul class="srcs reveal">
+        <li><a href="https://www.lechotouristique.com/article/hiver-2024-2025-la-france-tutoie-les-55-millions-de-journees-skieurs" target="_blank" rel="noopener">L'Écho Touristique</a><span>54,8 millions de journées-skieurs, +5,5 % (saison 2024-2025)</span></li>
+        <li><a href="https://www.iloveski.org/fr/2025/10/03/bilan-2024-2025/" target="_blank" rel="noopener">I Love Ski</a><span>+4,9 % au-dessus de la moyenne des trois derniers hivers ; retour des clientèles étrangères</span></li>
+        <li><a href="https://www.autoritedelaconcurrence.fr/sites/default/files/2026-03/Diapo_ESF_ADLCweb_FR.pdf" target="_blank" rel="noopener">Autorité de la concurrence (PDF)</a><span>Plus de 16 000 moniteurs ESF, plus de 80 % de la profession, 216 stations (décision 26-D-03)</span></li>
+        <li><a href="https://www.luxurytribune.com/en/from-the-slopes-to-the-podium-how-luxury-is-shaping-the-image-of-skiing" target="_blank" rel="noopener">Luxury Tribune</a><span>Le luxe investit la montagne et l'image du ski</span></li>
+        <li><a href="https://hautesavoiemontblanc-tourisme.com/offres/formule-journee-demi-journee-en-cours-prive-avec-lesf-megeve-fr-5835813/" target="_blank" rel="noopener">Office de tourisme Haute-Savoie Mont-Blanc</a><span>ESF Megève : 600 € la journée, 360 € le matin, 280 € l'après-midi</span></li>
+        <li><a href="https://ski-pro.com/en/ski-lessons/france/savoie/courchevel-1650-moriond/esf-courchevel-1650/private-ski-lesson-1051" target="_blank" rel="noopener">Ski-Pro, ESF Courchevel 1650</a><span>738 € la journée en haute saison</span></li>
+        <li><a href="https://ski-pro.com/en/ski-lessons/france/savoie/courchevel-1850/elite-ski-experience-2/private-ski-lesson-1050" target="_blank" rel="noopener">Ski-Pro, Elite Ski Experience</a><span>990 € la journée en haute saison</span></li>
+      </ul>
     </div>
   </section>
 </main>

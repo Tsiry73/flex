@@ -62,7 +62,7 @@
     "Photos de ski :": "Ski photos:", "(licence libre)": "(free licence)",
     /* Pied de page */
     "Leçons de ski privées sur mesure, de Courchevel à Megève puis Val d'Isère, au fil de la saison.": "Tailor-made private ski lessons, from Courchevel to Megève and Val d'Isère, through the season.",
-    "Espace client": "Guests", "Accueil": "Home", "Formules et tarifs": "Plans and prices", "Entreprise": "Company",
+    "Espace client": "Guests", "Espace entreprise": "Company area", "Accueil": "Home", "Formules et tarifs": "Plans and prices", "Entreprise": "Company",
     "Dossier stratégique": "Strategy file", "Plan de communication": "Communication plan",
     "Courchevel · 15 déc. – début janv.": "Courchevel · 15 Dec – early Jan", "Megève · mi-janv. – fin févr.": "Megève · mid-Jan – end Feb", "Val d'Isère · fin févr. – début mai": "Val d'Isère · end Feb – early May",
     "Projet étudiant INSEEC, démo sans vente réelle. Aucun paiement n'est encaissé, toutes les données sont fictives.": "INSEEC student project, demo with no real sales. No payment is taken and all data is fictitious.",

@@ -12,7 +12,8 @@
   .book{display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:start;padding:60px 24px 100px}
   .book > *{min-width:0}
   @media (max-width:1080px){.book{grid-template-columns:1fr}.summary{position:static}}
-  .steps{display:flex;gap:0;margin-bottom:40px;border-bottom:1px solid var(--line);overflow-x:auto}
+  .steps{display:flex;gap:0;margin-bottom:40px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+  .steps::-webkit-scrollbar{display:none}
   .steps span{flex:0 0 auto;padding:0 22px 14px 0;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
   .steps span.on{color:var(--ink);border-color:var(--gold)}
   .steps span.done{color:var(--gold)}
@@ -163,9 +164,9 @@
 (function(){
   const S = { step:1, offer:null, ext:false, date:'', station:'', adults:2, kids:2 };
   const STATIONS = [
-    { id:'Courchevel', art:'courchevel', from:'2026-12-15', to:'2027-01-09', label:'15 déc. – 9 janv.' },
-    { id:'Megève', art:'megeve', from:'2027-01-16', to:'2027-02-26', label:'16 janv. – 26 févr.' },
-    { id:"Val d'Isère", art:'valdisere', from:'2027-02-27', to:'2027-05-01', label:'27 févr. – 1er mai' }
+    { id:'Courchevel', img:'assets/img/st-courchevel.jpg', from:'2026-12-15', to:'2027-01-09', label:'15 déc. – 9 janv.' },
+    { id:'Megève', img:'assets/img/st-megeve.jpg', from:'2027-01-16', to:'2027-02-26', label:'16 janv. – 26 févr.' },
+    { id:"Val d'Isère", img:'assets/img/st-valdisere.jpg', from:'2027-02-27', to:'2027-05-01', label:'27 févr. – 1er mai' }
   ];
   const $ = id => document.getElementById(id);
   const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
@@ -192,8 +193,7 @@
   if (pre && FLEX_OFFERS.some(o => o.id === pre)) pickOffer(pre);
 
   // Stations
-  $('stations').innerHTML = STATIONS.map(s => '<div class="st" data-id="' + s.id + '"><div class="art" data-art="' + s.art + '"></div><div class="t"><strong>' + s.id + '</strong><span>' + s.label + '</span></div></div>').join('');
-  document.querySelectorAll('#stations .art').forEach(el => el.innerHTML = flexMountain(el.dataset.art));
+  $('stations').innerHTML = STATIONS.map(s => '<div class="st" data-id="' + s.id + '"><div class="art" style="background:url(' + s.img + ') center/cover"></div><div class="t"><strong>' + s.id + '</strong><span>' + s.label + '</span></div></div>').join('');
   document.querySelectorAll('.st').forEach(el => el.addEventListener('click', () => {
     const s = STATIONS.find(x => x.id === el.dataset.id);
     if (!S.date || S.date < s.from || S.date > s.to) { S.date = s.from; $('date').value = s.from; }
