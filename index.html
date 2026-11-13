@@ -115,6 +115,38 @@
   .lx .cta h2{font-size:clamp(1.8rem,3.8vw,3.2rem);font-weight:400;margin:18px 0 28px}
   .lx .cta .credit{margin:60px 0 0;font-size:.66rem;letter-spacing:.14em;color:var(--muted)}
   .lx .cta .credit a{color:var(--gold);text-decoration:none}
+  .lx .head{text-align:center;margin-bottom:64px}
+  .lx .head h3{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;margin:18px 0 .4em}
+  .lx .head p{margin:0 auto;color:var(--ink-2);max-width:460px}
+  .lx .plans{border-top:1px solid var(--line)}
+  .lx .plan{display:grid;grid-template-columns:1.3fr 1fr auto;gap:24px;align-items:center;padding:34px 0;border-bottom:1px solid var(--line);text-decoration:none;color:inherit;transition:background .35s,padding .35s}
+  .lx .plan:hover{background:rgba(166,135,90,.08);padding-left:18px;padding-right:18px}
+  .lx .plan h4{font-size:clamp(1.15rem,2.2vw,1.55rem);margin:0 0 6px}
+  .lx .plan .meta{font-family:var(--brand);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .lx .plan .price{font-size:clamp(1.4rem,2.8vw,2.1rem);font-weight:300;white-space:nowrap}
+  .lx .plan .price small{font-size:.6rem;letter-spacing:.2em;color:var(--muted);margin-left:8px}
+  .lx .plan .go{font-family:var(--brand);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:4px;white-space:nowrap}
+  .lx .inout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,100px);margin-top:70px}
+  .lx .inout h5{font-family:var(--brand);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:0 0 18px;font-weight:500}
+  .lx .inout ul{list-style:none;margin:0;padding:0}
+  .lx .inout li{padding:14px 0;border-bottom:1px solid var(--line);font-size:.92rem;color:var(--ink-2)}
+  .lx .faq-wrap{max-width:880px;margin:0 auto}
+  .lx details{border-top:1px solid var(--line);padding:24px 0}
+  .lx details:last-child{border-bottom:1px solid var(--line)}
+  .lx summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;font-size:clamp(1rem,1.7vw,1.2rem);font-weight:300}
+  .lx summary::-webkit-details-marker{display:none}
+  .lx summary::after{content:"+";color:var(--gold);transition:transform .3s}
+  .lx details[open] summary::after{transform:rotate(45deg)}
+  .lx details p{margin:14px 0 0;color:var(--ink-2);max-width:700px}
+  .lx .contact{display:grid;grid-template-columns:5fr 7fr;gap:clamp(30px,7vw,110px);align-items:start}
+  .lx .contact h3{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:400;margin:18px 0 .5em}
+  .lx .contact .kv{margin-top:30px}
+  .lx .cform{background:var(--snow);border:1px solid var(--line);padding:clamp(22px,4vw,44px)}
+  .lx .cform .note{font-size:.78rem;color:var(--muted);margin:14px 0 0}
+  @media (max-width:860px){
+    .lx .plan{grid-template-columns:1fr auto;gap:10px 16px}.lx .plan .go{display:none}
+    .lx .inout,.lx .contact{grid-template-columns:1fr}
+  }
   @media (max-width:860px){
     .lx .statement{padding:100px 0 90px}.lx .blk{padding-bottom:100px}
     .lx .duo,.lx .duo.rev{grid-template-columns:1fr;gap:34px}.lx .duo.rev .ph{order:0}
@@ -195,7 +227,7 @@
       <div class="wrap reveal">
         <span class="label">Flex by Tsiry</span>
         <h2>L'expérience du luxe alpin <em>à travers le ski.</em></h2>
-        <p class="lead">Des leçons privées uniquement : le programme est construit pour votre famille, et le moniteur vous retrouve de station en station.</p>
+        <p class="lead" style="max-width:720px">Pour les familles en séjour dans les grandes stations, Flex propose des leçons de ski privées sur mesure : un moniteur pour toute la famille, un programme adapté à chacun, pour progresser ensemble sans perdre une heure de vos vacances.</p>
       </div>
     </section>
 
@@ -235,6 +267,81 @@
           <figure><div class="im"><img src="assets/img/st-megeve.jpg" alt="Megève" loading="lazy"></div><figcaption><strong>Megève</strong><span>Mi-janv. – fin févr.</span></figcaption></figure>
           <figure><div class="im"><img src="assets/img/st-valdisere.jpg" alt="Val d'Isère" loading="lazy"></div><figcaption><strong>Val d'Isère</strong><span>Fin févr. – début mai</span></figcaption></figure>
         </div>
+      </div>
+    </section>
+
+        <section class="blk" id="formules">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="label">Nos formules</span>
+          <h3>Un prix par famille</h3>
+          <p>Jusqu'à 5 skieurs d'une même famille. Prix TTC, identiques dans les trois stations.</p>
+        </div>
+        <div class="plans reveal" id="plans"></div>
+        <div class="inout reveal">
+          <div>
+            <h5>Ce qui est inclus</h5>
+            <ul>
+              <li>Les leçons privées avec un moniteur diplômé d'État</li>
+              <li>Un programme adapté au niveau de chaque skieur</li>
+              <li>Jusqu'à 5 skieurs d'une même famille</li>
+              <li>Leçons en français ou en anglais</li>
+            </ul>
+          </div>
+          <div>
+            <h5>Ce qui n'est pas inclus</h5>
+            <ul>
+              <li>Les forfaits de remontées mécaniques</li>
+              <li>La location du matériel</li>
+              <li>L'hébergement, les repas et le transport</li>
+              <li>L'assurance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blk" id="faq">
+      <div class="wrap">
+        <div class="head reveal">
+          <span class="label">Questions fréquentes</span>
+          <h3>Avant de réserver</h3>
+        </div>
+        <div class="faq-wrap reveal">
+          <details><summary>Le prix est-il par personne ou par famille ?</summary><p>Par famille. Chaque formule comprend jusqu'à 5 skieurs d'une même famille, adultes et enfants. Au-delà, écrivez-nous pour une proposition sur mesure.</p></details>
+          <details><summary>Nous n'avons pas tous le même niveau. Comment ça se passe ?</summary><p>La leçon est privée : le moniteur prépare un exercice pour chacun, puis la famille descend ensemble sur une piste adaptée au skieur le moins à l'aise.</p></details>
+          <details><summary>À partir de quel âge les enfants peuvent-ils skier avec vous ?</summary><p>À partir de 4 ans, s'ils sont à l'aise sans leurs parents. Pour les plus jeunes, la formule Matinées est la mieux adaptée.</p></details>
+          <details><summary>Pourquoi trois stations ?</summary><p>Le moniteur suit la saison : Courchevel de mi-décembre à début janvier, Megève de mi-janvier à fin février, Val d'Isère de fin février à début mai. Vous choisissez la station selon la date de votre séjour.</p></details>
+          <details><summary>Peut-on réserver un week-end seulement ?</summary><p>Oui, avec la formule Le Week-end (samedi et dimanche). En semaine, le minimum est de cinq jours.</p></details>
+          <details><summary>Les forfaits et le matériel sont-ils compris ?</summary><p>Non. Les forfaits de remontées mécaniques et la location du matériel se réservent directement auprès des prestataires de la station.</p></details>
+          <details><summary>Comment paie-t-on ?</summary><p>Un acompte de 30 % à la réservation, le solde 30 jours avant le séjour.</p></details>
+          <details><summary>Quelles sont les conditions d'annulation ?</summary><p>Sans frais jusqu'à 30 jours avant le séjour, 50 % retenus entre 30 et 8 jours, puis la prestation est due. En cas de fermeture de la station, la journée est reportée ou remboursée.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="blk" id="contact">
+      <div class="wrap contact">
+        <div class="reveal">
+          <span class="label">Contact</span>
+          <h3>Une question avant de réserver ?</h3>
+          <p style="color:var(--ink-2);max-width:360px">Écrivez-nous, nous vous répondons dans la journée, en français ou en anglais.</p>
+          <dl class="kv">
+            <dt>Courriel</dt><dd>contact@flex-ski.example</dd>
+            <dt>Téléphone</dt><dd>+33 4 00 00 00 00 (numéro fictif)</dd>
+          </dl>
+        </div>
+        <form class="cform reveal" id="contact-form" novalidate>
+          <div class="grid g2" style="gap:0 18px">
+            <div class="field"><label for="c-name">Nom</label><input id="c-name" autocomplete="off" placeholder="Famille Martin"></div>
+            <div class="field"><label for="c-mail">Courriel</label><input id="c-mail" type="email" autocomplete="off" placeholder="vous@exemple.com"></div>
+          </div>
+          <div class="field"><label for="c-station">Station envisagée</label>
+            <select id="c-station"><option>Courchevel</option><option>Megève</option><option>Val d'Isère</option><option>Je ne sais pas encore</option></select></div>
+          <div class="field"><label for="c-msg">Votre message</label><textarea id="c-msg" placeholder="Nous sommes quatre, deux enfants de 7 et 10 ans…"></textarea></div>
+          <button class="btn" type="submit" style="width:100%">Envoyer la demande</button>
+          <p class="note">Démo : aucun message n'est envoyé. La demande apparaît comme nouveau contact dans le CRM de ce navigateur.</p>
+        </form>
       </div>
     </section>
 
@@ -368,6 +475,21 @@
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { measure(); sizeFx(); }, 120); });
   addEventListener('load', measure);
 
+    /* Formules (prix TTC) et formulaire de contact relié au CRM */
+  document.getElementById('plans').innerHTML = FLEX_OFFERS.map(o =>
+    '<a class="plan" href="reserver.html?formule=' + o.id + '"><div><h4>' + o.name + '</h4><span class="meta">' + o.hours + '</span></div>' +
+    '<div class="price">' + flexEur(o.ttc) + '<small>TTC</small></div><span class="go">Choisir</span></a>').join('');
+  document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const n = document.getElementById('c-name'), m = document.getElementById('c-mail'), t = document.getElementById('c-msg');
+    if (!n.value.trim() || !m.value.includes('@') || !t.value.trim()) { flexToast('Merci de remplir le nom, le courriel et le message.'); return; }
+    try {
+      const leads = JSON.parse(localStorage.getItem('flex_inbound') || '[]');
+      leads.push({ type: 'lead', name: n.value.trim(), email: m.value.trim(), station: document.getElementById('c-station').value, message: t.value.trim(), date: new Date().toISOString() });
+      localStorage.setItem('flex_inbound', JSON.stringify(leads));
+    } catch (err) {}
+    e.target.reset(); flexToast('Merci. Votre demande a bien été reçue (démo).');
+  });
   /* Légère profondeur sur les visuels I, II et III au défilement (transform seul) */
   const vins = [...document.querySelectorAll('.lx .ph img')].filter(v => !v.style.transform);
   let pt = false;

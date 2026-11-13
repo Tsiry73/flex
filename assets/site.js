@@ -43,7 +43,7 @@
       '<div class="wrap"><div class="foot-grid">' +
         '<div><a class="brand" href="index.html">' + LOGO.replace('#191815', '#F5F1E8') + '<span><span class="brand-name">FLEX</span><span class="brand-by">by Tsiry</span></span></a>' +
         '<p style="margin-top:20px;max-width:340px">Leçons de ski privées sur mesure, de Courchevel à Megève puis Val d\'Isère, au fil de la saison.</p></div>' +
-        '<div><h4>Espace client</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="reserver.html">Réserver</a></li></ul></div>' +
+        '<div><h4>Espace client</h4><ul><li><a href="index.html">Accueil</a></li><li><a href="index.html#formules">Formules et tarifs</a></li><li><a href="index.html#faq">Questions fréquentes</a></li><li><a href="index.html#contact">Contact</a></li><li><a href="reserver.html">Réserver</a></li></ul></div>' +
         '<div><h4>Entreprise</h4><ul><li><a href="crm.html">CRM</a></li><li><a href="strategie.html">Dossier stratégique</a></li><li><a href="communication.html">Plan de communication</a></li></ul></div>' +
         '<div><h4>Saison 2026-2027</h4><ul><li>Courchevel · 15 déc. – début janv.</li><li>Megève · mi-janv. – fin févr.</li><li>Val d\'Isère · fin févr. – début mai</li></ul></div>' +
       '</div>' +
