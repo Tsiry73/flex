@@ -150,7 +150,7 @@
       <div class="row"><span>Prolongation</span><span id="s-ex">Non</span></div>
       <div class="total" id="s-total">0 €</div>
       <div class="ht" id="s-ht">TTC</div>
-      <p style="font-size:.8rem;color:#A9A398;margin-top:18px">Forfaits et matériel non compris. La conciergerie les réserve pour vous.</p>
+      <p style="font-size:.8rem;color:#A9A398;margin-top:18px">Forfaits et matériel non compris.</p>
     </aside>
   </div>
 </main>
@@ -158,6 +158,7 @@
 <div id="done" hidden></div>
 
 <script src="assets/site.js"></script>
+<script src="assets/i18n.js"></script>
 <script>
 (function(){
   const S = { step:1, offer:null, ext:false, date:'', station:'', adults:2, kids:2 };
@@ -211,7 +212,7 @@
     const k = b.dataset.c, d = +b.dataset.d, min = k === 'adults' ? 1 : 0;
     const next = S[k] + d;
     if (next < min) return;
-    if (S.adults + S.kids + d > 5 && d > 0) { $('err3').textContent = 'Le prix comprend jusqu\'à 5 skieurs. Pour un groupe plus grand, écrivez à la conciergerie.'; return; }
+    if (S.adults + S.kids + d > 5 && d > 0) { $('err3').textContent = 'Le prix comprend jusqu\'à 5 skieurs. Pour un groupe plus grand, écrivez-nous.'; return; }
     $('err3').textContent = ''; S[k] = next; render();
   }));
 

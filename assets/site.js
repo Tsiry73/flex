@@ -22,7 +22,7 @@
       '<a class="brand" href="index.html" aria-label="Flex by Tsiry, accueil">' + LOGO +
         '<span><span class="brand-name">FLEX</span><span class="brand-by">by Tsiry</span></span></a>' +
       '<ul class="nav-side nav-right">' + right.map(li).join('') + CTA + '</ul>' +
-      '<button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>' +
+      '<div class="tools"><div class="lang" role="group" aria-label="Langue"><button type="button" data-lang="fr" class="on" aria-pressed="true">FR</button><span aria-hidden="true">/</span><button type="button" data-lang="en" aria-pressed="false">EN</button></div><button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button></div>' +
       '<ul class="nav-mobile">' + left.concat(right).map(li).join('') + CTA + '</ul>' +
     '</div>';
 
@@ -36,6 +36,9 @@
     burger.setAttribute('aria-expanded', open);
   });
   list.addEventListener('click', e => { if (e.target.tagName === 'A') list.classList.remove('open'); });
+  const closeMenu = () => { list.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); };
+  document.addEventListener('click', e => { if (!nav.contains(e.target)) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
   if (!document.body.dataset.nofooter) {
     const f = document.createElement('footer');
