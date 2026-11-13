@@ -35,6 +35,8 @@
   .ice .sky{background:linear-gradient(180deg,#082a5e 0%,#2f6db6 26%,#7fb8e8 38%,#cfe8f8 45%,rgba(207,232,248,.55) 56%,rgba(207,232,248,0) 70%)}
 
   /* Soleil : un seul astre qui traverse le ciel */
+  .photo{position:absolute;inset:0;z-index:2;opacity:0;visibility:hidden;background-size:cover;background-position:var(--pos,50% 50%);will-change:opacity,transform;backface-visibility:hidden}
+  .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,12,.32) 0%,rgba(8,10,12,.1) 36%,rgba(8,10,12,.82) 100%)}
   .sun{position:absolute;left:0;top:0;width:38vmin;height:38vmin;margin:-19vmin 0 0 -19vmin;z-index:2;opacity:0;pointer-events:none;mix-blend-mode:screen;will-change:transform,opacity;
     background:radial-gradient(circle,#fff 0,#fff7e2 9%,rgba(255,196,120,.6) 22%,rgba(255,140,70,.2) 42%,rgba(255,120,60,0) 68%)}
   .flare{position:absolute;left:0;top:0;z-index:2;width:0;height:0;opacity:0;pointer-events:none;mix-blend-mode:screen;will-change:transform,opacity}
@@ -162,6 +164,9 @@
       <div class="scene" id="scene" aria-hidden="true">
         <div class="mood base"><div class="ph"></div><div class="sky"></div></div>
       </div>
+      <div class="photo" style="background-image:url(assets/img/land-courchevel.jpg);--pos:50% 55%" aria-hidden="true"></div>
+      <div class="photo" style="background-image:url(assets/img/land-megeve.jpg);--pos:50% 66%" aria-hidden="true"></div>
+      <div class="photo" style="background-image:url(assets/img/land-valdisere.jpg);--pos:50% 62%" aria-hidden="true"></div>
       <div class="fogwrap" id="fogwrap" aria-hidden="true"><div class="fog"></div><div class="fog"></div><div class="fog"></div></div>
       <canvas id="fx" aria-hidden="true"></canvas>
       <div class="shade" aria-hidden="true"></div>
@@ -358,7 +363,7 @@
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const story = document.getElementById('story'), stage = document.getElementById('stage');
   const scene = document.getElementById('scene');
-  const fogwrap = document.getElementById('fogwrap');
+  const fogwrap = document.getElementById('fogwrap'), photos = [...document.querySelectorAll('.photo')];
   const chaps = [...document.querySelectorAll('.chap')], rail = [...document.querySelectorAll('#rail li')];
   const cue = document.getElementById('cue'), fadeout = document.getElementById('fadeout');
   const NAV = 72;
@@ -389,6 +394,12 @@
     const [cz, cfx, cfy] = camAt(p); let ctx_ = stageW * .5 - cz * (GX + cfx * GS), cty = stageH * .46 - cz * (GY + cfy * GS);
     ctx_ = Math.max(stageW - cz * 1333 * GS, Math.min(0, ctx_)); cty = Math.max(stageH - cz * 2000 * GS, Math.min(0, cty));
     put(scene, 'transform', 'translate3d(' + ctx_.toFixed(1) + 'px,' + cty.toFixed(1) + 'px,0) scale(' + cz.toFixed(4) + ')');
+    photos.forEach((el, i) => {
+      const [a, b] = RANGES[i + 1], o = clamp01((p - (a - .06)) / .1);
+      put(el, 'visibility', o > .004 ? 'visible' : 'hidden');
+      if (o > .004) { put(el, 'opacity', o.toFixed(3)); put(el, 'transform', 'scale(' + (1.1 - .08 * clamp01((p - a) / (b - a))).toFixed(3) + ')'); }
+    });
+    put(scene, 'visibility', p > .42 ? 'hidden' : 'visible');
     put(fogwrap, 'transform', 'translate3d(0,' + (-p * 6).toFixed(2) + 'vh,0)');
     starAlpha = 0;
 
@@ -448,7 +459,7 @@
     requestAnimationFrame(loop);
   }
 
-  const img = new Image(); img.src = 'assets/img/landing.jpg'; if (img.decode) img.decode().catch(() => {});
+  ['landing', 'land-courchevel', 'land-megeve', 'land-valdisere'].forEach(n => { const i = new Image(); i.src = 'assets/img/' + n + '.jpg'; if (i.decode) i.decode().catch(() => {}); });
 
   measure(); sizeFx(); cur = progress(); apply(cur); requestAnimationFrame(loop);
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { measure(); sizeFx(); }, 120); });
